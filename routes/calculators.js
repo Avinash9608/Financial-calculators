@@ -117,7 +117,7 @@ router.get("/download", async (req, res) => {
       },
     });
 
-    const filePath = path.join(__dirname, "..", "public", "finance_report.pdf");
+    const filePath = path.join(__dirname, "..", "src", "public", "finance_report.pdf");
     const writeStream = fs.createWriteStream(filePath, { flags: "w" });
 
     doc.pipe(writeStream);
