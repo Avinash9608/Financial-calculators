@@ -1,0 +1,358 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Record</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .form-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1s ease-out;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      form div {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      input:focus {
+        outline: none;
+        box-shadow: 0 0 5px #2575fc;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #2575fc;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #1e5fdb;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: #fff;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Add New Record</h1>
+      <form action="/add-record" method="POST">
+        <div>
+          <label for="type">Type:</label>
+          <input
+            type="text"
+            name="type"
+            id="type"
+            placeholder="Enter type (e.g., Expense)"
+            required
+          />
+        </div>
+        <div>
+          <label for="description">Description:</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="Enter a brief description"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            placeholder="Enter amount"
+            required
+          />
+        </div>
+        <div>
+          <label for="date">Date:</label>
+          <input type="date" name="date" id="date" required />
+        </div>
+        <button type="submit">Add Record</button>
+      </form>
+      <div class="footer">
+        <p><a href="/">Back to Dashboard</a></p>
+      </div>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Record</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #0b5c77;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .form-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1s ease-out;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      form div {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      input:focus {
+        outline: none;
+        box-shadow: 0 0 5px #2575fc;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #3dbee2dc;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #a4aeb9;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: #0b5c77;
+        text-decoration: underline;
+      }
+
+      .background-charts {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .background-charts canvas {
+        position: absolute;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-charts">
+      <canvas id="backgroundPie"></canvas>
+      <canvas id="backgroundBar"></canvas>
+    </div>
+
+    <div class="form-container">
+      <h1>Add New Record</h1>
+      <form action="/add-record" method="POST">
+        <div>
+          <label for="type">Type:</label>
+          <input
+            type="text"
+            name="type"
+            id="type"
+            placeholder="Enter type (e.g., Expense)"
+            required
+          />
+        </div>
+        <div>
+          <label for="description">Description:</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="Enter a brief description"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            placeholder="Enter amount"
+            required
+          />
+        </div>
+        <div>
+          <label for="date">Date:</label>
+          <input type="date" name="date" id="date" required />
+        </div>
+        <button type="submit">Add Record</button>
+      </form>
+      <div class="footer">
+        <p><a href="/">Back to Dashboard</a></p>
+      </div>
+    </div>
+
+    <script>
+      const createBackgroundChart = (id, type, data) => {
+        const ctx = document.getElementById(id).getContext("2d");
+        new Chart(ctx, {
+          type: type,
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 2000,
+            },
+          },
+        });
+      };
+
+      const backgroundPieData = {
+        labels: ["Savings", "Expenses"],
+        datasets: [
+          {
+            data: [300, 200],
+            backgroundColor: ["#ff6384", "#36a2eb"],
+          },
+        ],
+      };
+
+      const backgroundBarData = {
+        labels: ["January", "February"],
+        datasets: [
+          {
+            label: "Monthly Finances",
+            data: [300, 200],
+            backgroundColor: ["#4bc0c0", "#ffcd56"],
+          },
+        ],
+      };
+
+      createBackgroundChart("backgroundPie", "pie", backgroundPieData);
+      createBackgroundChart("backgroundBar", "bar", backgroundBarData);
+    </script>
+  </body>
+</html>

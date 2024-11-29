@@ -1,0 +1,854 @@
+<!-- <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINANCE CALCULATOR</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://kit.fontawesome.com/3da5cff3a5.js"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/style/style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <a
+      class="navbar-brand ms-5 me-5 fs-1 letter-space text-white"
+      href="/index.ejs"
+      >FINANCE CALCULATOR</a
+    >
+
+    <div class="collapse navbar-collapse" id="ResponsiveNavContent">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownFinancialCalculator"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Financial Calculator</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="dropdownFinancialCalculator"
+          >
+            <li><a class="dropdown-item" href="/emi">EMI Calculator</a></li>
+            <li><a class="dropdown-item" href="/gst">GST Calculator</a></li>
+            <li><a class="dropdown-item" href="/sip">SIP Calculator</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownLoanCalculator"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Loan Calculator</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownLoanCalculator">
+            <li><a class="dropdown-item" href="#">Home Loan</a></li>
+            <li><a class="dropdown-item" href="#">Car Loan</a></li>
+            <li><a class="dropdown-item" href="#">Personal Loan</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownInvestmentCalculators"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Investment Calculators</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="dropdownInvestmentCalculators"
+          >
+            <li><a class="dropdown-item" href="#">SIP</a></li>
+            <li><a class="dropdown-item" href="#">PPF</a></li>
+            <li><a class="dropdown-item" href="#">FD</a></li>
+            <li><a class="dropdown-item" href="#">RD</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownTaxCalculators"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Tax and Income Calculators</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownTaxCalculators">
+            <li><a class="dropdown-item" href="#">Income Tax</a></li>
+            <li><a class="dropdown-item" href="#">GST</a></li>
+            <li><a class="dropdown-item" href="#">HRA</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownBankingFinance"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Banking and Finance</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownBankingFinance">
+            <li><a class="dropdown-item" href="#">Real Estate</a></li>
+            <li><a class="dropdown-item" href="#">Insurance</a></li>
+            <li><a class="dropdown-item" href="#">Savings Tools</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownAdvancedOptions"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Advanced Options</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownAdvancedOptions">
+            <li><a class="dropdown-item" href="#">Comparison Tools</a></li>
+            <li><a class="dropdown-item" href="#">Downloadable Reports</a></li>
+            <li><a class="dropdown-item" href="#">Data Visualizations</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container content">
+    <div
+      id="slider"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="0"
+          class="active"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="2"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item">
+          <img
+            src="https://www.alacriti.com/wp-content/uploads/2014/11/AlacritiHowBillPaymentExceptionItemsImpactElectronicRoutedPayments.jpg"
+            alt="onlinebill"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+        <div class="carousel-item active">
+          <img
+            src="https://greatfallsmt.net/sites/default/files/styles/gallery500/public/imageattachments/finance/page/32221/adobestock_111523070.jpg?itok=ukeABLKK"
+            alt="payonline"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://www.camdennational.bank/assets/files/yJAuJngh/financial%20calcs.jpg"
+            alt="billing"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#slider"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#slider"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <br />
+    <hr />
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Take Control of Your Finances</h1>
+        <p class="section-text">
+          Our financial calculators are designed to help you make informed
+          decisions about your money.
+        </p>
+        <ul class="section-list">
+          <li>
+            <i class="fas fa-check-circle"></i> Calculate your savings goals
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Determine your investment
+            strategy
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Pay off debt and improve your
+            credit score
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Plan for retirement and achieve
+            financial freedom
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Benefits of Using Financial Calculators</h1>
+        <ul class="section-list">
+          <li><i class="fas fa-clock"></i> Save time and effort</li>
+          <li>
+            <i class="fas fa-money-bill-wave-alt"></i> Make informed investment
+            decisions
+          </li>
+          <li>
+            <i class="fas fa-funnel-dollar"></i> Optimize your financial
+            planning
+          </li>
+          <li>
+            <i class="fas fa-shield-alt"></i> Protect your financial future
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Get Started Today!</h1>
+        <p class="section-text">
+          Take the first step towards achieving your financial goals.
+        </p>
+        <button class="btn btn-primary btn-lg mt-3">Learn More</button>
+      </div>
+    </div>
+    <hr />
+  </div>
+  <footer>
+    <p class="fw-lighter text-center text-white fs-6 pt-1">
+      © 2021 FINANCE CALCULATOR! All Rights Reserved
+    </p>
+  </footer>
+</body>
+
+<style>
+  body {
+    background-color: #ffff;
+    font-family: "Barlow", sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .navbar-nav .nav-item.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f8f9fa;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .dropdown-menu .dropdown-item {
+    color: #0b5c77;
+  }
+
+  nav {
+    background: rgb(12, 108, 133);
+    background: linear-gradient(
+      90deg,
+      rgba(12, 108, 133, 1) 19%,
+      rgba(2, 0, 36, 1) 100%
+    );
+  }
+
+  .letter-space {
+    letter-spacing: 0.6rem;
+  }
+
+  ul li a:hover {
+    text-decoration: overline;
+    opacity: 0.8;
+  }
+
+  nav {
+    background: rgb(12, 108, 133);
+    background: linear-gradient(
+      90deg,
+      rgba(12, 108, 133, 1) 19%,
+      rgba(2, 0, 36, 1) 100%
+    );
+  }
+
+  p {
+    color: #4a4a4a;
+    text-align: justify;
+  }
+
+  p a:hover {
+    text-decoration-line: underline;
+  }
+
+  .letter-space {
+    letter-spacing: 0.6rem;
+  }
+
+  .float-right {
+    position: relative;
+    right: 0;
+  }
+
+  .bg-special {
+    background-color: #232629;
+    color: white;
+  }
+
+  .txt-shadow {
+    transition: box-shadow 0.8s;
+  }
+
+  .content {
+    margin-top: 10rem;
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0b5c77;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .section-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-list {
+    list-style-type: none;
+    padding: 0;
+    color: #333;
+  }
+
+  .section-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .section-list i {
+    color: #0b5c77;
+    margin-right: 10px;
+    font-size: 1.3rem;
+  }
+
+  .btn-primary {
+    background-color: #0b5c77;
+    border-color: #0b5c77;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #025a95;
+    border-color: #025a95;
+  }
+
+  .col-md-6,
+  .col-lg-4 {
+    margin-top: 1.5rem;
+  }
+
+  .row {
+    margin-top: 4rem;
+  }
+</style> -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINANCE CALCULATOR</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://kit.fontawesome.com/3da5cff3a5.js"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/style/style.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <a
+      class="navbar-brand ms-5 me-5 fs-1 letter-space text-white"
+      href="/index.ejs"
+      >FINANCE CALCULATOR</a
+    >
+
+    <div class="collapse navbar-collapse" id="ResponsiveNavContent">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownFinancialCalculator"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Financial Calculator</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="dropdownFinancialCalculator"
+          >
+            <li><a class="dropdown-item" href="/emi">EMI Calculator</a></li>
+            <li><a class="dropdown-item" href="/gst">GST Calculator</a></li>
+            <li><a class="dropdown-item" href="/sip">SIP Calculator</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownLoanCalculator"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Loan Calculator</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownLoanCalculator">
+            <li><a class="dropdown-item" href="/homeloan">Home Loan</a></li>
+            <li><a class="dropdown-item" href="/carloan">Car Loan</a></li>
+            <li>
+              <a class="dropdown-item" href="/personalloan">Personal Loan</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownInvestmentCalculators"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Investment Calculators</a
+          >
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="dropdownInvestmentCalculators"
+          >
+            <li><a class="dropdown-item" href="/sip">SIP</a></li>
+            <li><a class="dropdown-item" href="/ppf">PPF</a></li>
+            <li><a class="dropdown-item" href="/fd">FD</a></li>
+            <li><a class="dropdown-item" href="/rd">RD</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownTaxCalculators"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Tax and Income Calculators</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownTaxCalculators">
+            <li><a class="dropdown-item" href="/incometax">Income Tax</a></li>
+            <li><a class="dropdown-item" href="/gst">GST</a></li>
+            <li><a class="dropdown-item" href="/hra">HRA</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownBankingFinance"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Banking and Finance</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownBankingFinance">
+            <li><a class="dropdown-item" href="/realEstate">Real Estate</a></li>
+            <li><a class="dropdown-item" href="/insurance">Insurance</a></li>
+            <li>
+              <a class="dropdown-item" href="/savingtools">Savings Tools</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown me-5">
+          <a
+            class="nav-link ms-5 text-white txt-shadow"
+            href="#"
+            id="dropdownAdvancedOptions"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Advanced Options</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="dropdownAdvancedOptions">
+            <li>
+              <a class="dropdown-item" href="/campersiontools"
+                >Comparison Tools</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="/records">Downloadable Reports</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/datavisualization"
+                >Data Visualizations</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container content">
+    <div
+      id="slider"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="0"
+          class="active"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#slider"
+          data-bs-slide-to="2"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item">
+          <img
+            src="https://www.alacriti.com/wp-content/uploads/2014/11/AlacritiHowBillPaymentExceptionItemsImpactElectronicRoutedPayments.jpg"
+            alt="onlinebill"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+        <div class="carousel-item active">
+          <img
+            src="https://greatfallsmt.net/sites/default/files/styles/gallery500/public/imageattachments/finance/page/32221/adobestock_111523070.jpg?itok=ukeABLKK"
+            alt="payonline"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://www.camdennational.bank/assets/files/yJAuJngh/financial%20calcs.jpg"
+            alt="billing"
+            class="d-block w-100"
+            style="height: 500px"
+            draggable="false"
+          />
+        </div>
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#slider"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#slider"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <br />
+    <hr />
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Take Control of Your Finances</h1>
+        <p class="section-text">
+          Our financial calculators are designed to help you make informed
+          decisions about your money.
+        </p>
+        <ul class="section-list">
+          <li>
+            <i class="fas fa-check-circle"></i> Calculate your savings goals
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Determine your investment
+            strategy
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Pay off debt and improve your
+            credit score
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Plan for retirement and achieve
+            financial freedom
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Benefits of Using Financial Calculators</h1>
+        <ul class="section-list">
+          <li><i class="fas fa-clock"></i> Save time and effort</li>
+          <li>
+            <i class="fas fa-chart-line"></i> Make smarter financial decisions
+          </li>
+          <li>
+            <i class="fas fa-users"></i> Increase your financial knowledge
+          </li>
+          <li><i class="fas fa-cogs"></i> Customizable for your needs</li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <h1 class="section-heading">Get Started Now</h1>
+        <ul class="section-list">
+          <li>
+            <i class="fas fa-arrow-circle-right"></i> Try our free calculators
+          </li>
+          <li>
+            <i class="fas fa-arrow-circle-right"></i> Start planning for your
+            future
+          </li>
+          <li>
+            <i class="fas fa-arrow-circle-right"></i> Track your progress and
+            achieve your goals
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white mt-auto py-4">
+    <div class="container text-center">
+      <p>© 2024 Finance Calculator. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+<style>
+  body {
+    background-color: #ffff;
+    font-family: "Barlow", sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .navbar-nav .nav-item.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f8f9fa;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .dropdown-menu .dropdown-item {
+    color: #0b5c77;
+  }
+
+  nav {
+    background: rgb(12, 108, 133);
+    background: linear-gradient(
+      90deg,
+      rgba(12, 108, 133, 1) 19%,
+      rgba(2, 0, 36, 1) 100%
+    );
+  }
+
+  .letter-space {
+    letter-spacing: 0.6rem;
+  }
+
+  ul li a:hover {
+    text-decoration: overline;
+    opacity: 0.8;
+  }
+
+  nav {
+    background: rgb(12, 108, 133);
+    background: linear-gradient(
+      90deg,
+      rgba(12, 108, 133, 1) 19%,
+      rgba(2, 0, 36, 1) 100%
+    );
+  }
+
+  p {
+    color: #e5d9d9;
+    text-align: -webkit-center;
+    font-weight: bold;
+  }
+
+  p a:hover {
+    text-decoration-line: underline;
+  }
+
+  .letter-space {
+    letter-spacing: 0.6rem;
+  }
+
+  .float-right {
+    position: relative;
+    right: 0;
+  }
+
+  .bg-special {
+    background-color: #232629;
+    color: white;
+  }
+
+  .txt-shadow {
+    transition: box-shadow 0.8s;
+  }
+
+  .content {
+    margin-top: 10rem;
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0b5c77;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .section-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-list {
+    list-style-type: none;
+    padding: 0;
+    color: #333;
+  }
+
+  .section-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .section-list i {
+    color: #0b5c77;
+    margin-right: 10px;
+    font-size: 1.3rem;
+  }
+
+  .btn-primary {
+    background-color: #0b5c77;
+    border-color: #0b5c77;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #025a95;
+    border-color: #025a95;
+  }
+
+  .col-md-6,
+  .col-lg-4 {
+    margin-top: 1.5rem;
+  }
+
+  .row {
+    margin-top: 4rem;
+  }
+  .bg-dark {
+    background-color: #0b5c77 !important;
+  }
+</style>

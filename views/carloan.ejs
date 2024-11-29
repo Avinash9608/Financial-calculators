@@ -1,0 +1,389 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Loan Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #444;
+        margin-bottom: 30px;
+      }
+
+      .form-group label {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: #74ebd5;
+        box-shadow: 0 0 8px rgba(116, 235, 213, 0.5);
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.5rem;
+        color: #007bff;
+        background-color: #f0f8ff;
+        padding: 10px;
+        border-radius: 8px;
+        animation: popIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Car Loan Calculator</h1>
+      <form action="/carloan" method="post">
+        <div class="form-group">
+          <label for="principal">Loan Amount (₹):</label>
+          <input
+            type="number"
+            name="principal"
+            id="principal"
+            required
+            placeholder="Enter loan amount"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            required
+            placeholder="Enter rate of interest"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tenure">Tenure (in months):</label>
+          <input
+            type="number"
+            name="tenure"
+            id="tenure"
+            required
+            placeholder="Enter loan tenure in months"
+            min="1"
+          />
+        </div>
+        <button type="submit">Calculate EMI</button>
+      </form>
+      <% if (typeof result !== 'undefined') { %>
+      <h2>Calculated EMI: ₹<%= result %></h2>
+      <% } %>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Loan Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #444;
+        margin-bottom: 30px;
+      }
+
+      .form-group label {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: #74ebd5;
+        box-shadow: 0 0 8px rgba(116, 235, 213, 0.5);
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.5rem;
+        color: #007bff;
+        background-color: #f0f8ff;
+        padding: 10px;
+        border-radius: 8px;
+        animation: popIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Car Loan Calculator</h1>
+      <form action="/carloan" method="post">
+        <div class="form-group">
+          <label for="financeCompany">Car Loan Company:</label>
+          <select name="financeCompany" id="financeCompany" required>
+            <option value="CompanyA">Reliance Commercial Finance</option>
+            <option value="CompanyB">Tata Capital</option>
+            <option value="CompanyC">Mahindra Finance</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="principal">Loan Amount (₹):</label>
+          <input
+            type="number"
+            name="principal"
+            id="principal"
+            required
+            placeholder="Enter loan amount"
+            min="0"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="state">Select State:</label>
+          <select name="state" id="state" required>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Delhi">Delhi</option>
+            <option value="TamilNadu">Tamil Nadu</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="WestBengal">West Bengal</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            required
+            placeholder="Enter rate of interest"
+            min="0"
+            readonly
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tenure">Tenure (in months):</label>
+          <input
+            type="number"
+            name="tenure"
+            id="tenure"
+            required
+            placeholder="Enter loan tenure in months"
+            min="1"
+          />
+        </div>
+
+        <button type="submit">Calculate EMI</button>
+      </form>
+
+      <% if (typeof result !== 'undefined') { %>
+      <h2>Calculated EMI: ₹<%= result %></h2>
+      <% } %>
+    </div>
+
+    <script>
+      const financeCompanySelect = document.getElementById("financeCompany");
+      const stateSelect = document.getElementById("state");
+      const rateInput = document.getElementById("rate");
+
+      // Interest rates based on finance company and state
+      const rates = {
+        CompanyA: {
+          Maharashtra: 7.5,
+          Karnataka: 8.0,
+          Delhi: 7.8,
+          TamilNadu: 7.2,
+          UP: 7.5,
+          WestBengal: 7.6,
+        },
+        CompanyB: {
+          Maharashtra: 8.0,
+          Karnataka: 8.5,
+          Delhi: 8.2,
+          TamilNadu: 7.8,
+          UP: 8.0,
+          WestBengal: 8.1,
+        },
+        CompanyC: {
+          Maharashtra: 7.0,
+          Karnataka: 7.5,
+          Delhi: 7.2,
+          TamilNadu: 7.0,
+          UP: 7.3,
+          WestBengal: 7.4,
+        },
+      };
+
+      // Update rate when finance company or state changes
+      function updateRate() {
+        const selectedCompany = financeCompanySelect.value;
+        const selectedState = stateSelect.value;
+        rateInput.value = rates[selectedCompany][selectedState];
+      }
+
+      financeCompanySelect.addEventListener("change", updateRate);
+      stateSelect.addEventListener("change", updateRate);
+
+      // Set default rate on page load
+      updateRate();
+    </script>
+  </body>
+</html>

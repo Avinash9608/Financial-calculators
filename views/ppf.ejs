@@ -1,0 +1,347 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPF Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #444;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: #74ebd5;
+        box-shadow: 0 0 8px rgba(116, 235, 213, 0.5);
+        outline: none;
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .btn-success:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, #185a9d, #43cea2);
+      }
+
+      h2 {
+        margin-top: 20px;
+        text-align: center;
+        color: #444;
+        animation: popIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>PPF Calculator</h1>
+      <form action="/ppf" method="post">
+        <div class="form-group">
+          <label for="annualDeposit">Annual Deposit (₹):</label>
+          <input
+            type="number"
+            name="annualDeposit"
+            id="annualDeposit"
+            required
+            placeholder="Enter annual deposit amount"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            required
+            placeholder="Enter rate of interest"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tenure">Tenure (in years):</label>
+          <input
+            type="number"
+            name="tenure"
+            id="tenure"
+            required
+            placeholder="Enter tenure in years"
+          />
+        </div>
+        <button type="submit" class="btn btn-success">
+          Calculate Maturity
+        </button>
+      </form>
+      <% if (typeof result !== 'undefined') { %>
+      <h2>Maturity Amount: ₹<%= result %></h2>
+      <% } %>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPF Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 600px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #444;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: #74ebd5;
+        box-shadow: 0 0 8px rgba(116, 235, 213, 0.5);
+        outline: none;
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .btn-success:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, #185a9d, #43cea2);
+      }
+
+      h2 {
+        margin-top: 20px;
+        text-align: center;
+        color: #444;
+        animation: popIn 0.5s ease-out;
+      }
+
+      .info-box {
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        text-align: center;
+        color: #007bff;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>PPF Calculator</h1>
+      <form action="/ppf" method="post">
+        <div class="form-group">
+          <label for="annualDeposit">Annual Deposit (₹):</label>
+          <input
+            type="number"
+            name="annualDeposit"
+            id="annualDeposit"
+            required
+            placeholder="Enter annual deposit amount"
+            min="500"
+            max="150000"
+            step="500"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            value="7.1"
+            required
+            readonly
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="startYear">When would you like to start investing?</label>
+          <select name="startYear" id="startYear" class="form-control" required>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="tenure">Number of Years to Contribute:</label>
+          <select name="tenure" id="tenure" class="form-control" required>
+            <option value="15">15 years</option>
+            <option value="20">20 years</option>
+            <option value="25">25 years</option>
+            <option value="30">30 years</option>
+            <option value="35">35 years</option>
+          </select>
+          <small class="form-text text-muted">
+            Minimum lock-in period is 15 years.
+          </small>
+        </div>
+        <button type="submit" class="btn btn-success">
+          Calculate Maturity Amount
+        </button>
+      </form>
+
+      <% if (typeof result !== 'undefined') { %>
+      <h2>Maturity Amount: ₹<%= result %></h2>
+      <div class="info-box">
+        <p>Rate of Interest: 7.1% (Subject to change by the Government)</p>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

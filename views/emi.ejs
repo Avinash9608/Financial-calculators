@@ -1,0 +1,371 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMI Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3da5cff3a5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/style.css" />
+    <style>
+      body {
+        font-family: "Barlow", sans-serif;
+        background-color: #f4f7fc;
+        color: #333;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      h1 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 36px;
+        font-weight: 700;
+        animation: fadeIn 1s ease-in;
+      }
+
+      label {
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: block;
+        animation: fadeIn 1.5s ease-in;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        animation: fadeIn 2s ease-in;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        animation: fadeIn 2.5s ease-in;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        color: #28a745;
+        animation: fadeIn 3s ease-in;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>EMI Calculator</h1>
+      <form action="/emi" method="post">
+        <div class="form-group">
+          <label for="principal">Principal:</label>
+          <input
+            type="number"
+            name="principal"
+            id="principal"
+            required
+            placeholder="Enter principal amount"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            required
+            placeholder="Enter rate of interest"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tenure">Tenure (months):</label>
+          <input
+            type="number"
+            name="tenure"
+            id="tenure"
+            required
+            placeholder="Enter tenure in months"
+            min="1"
+          />
+        </div>
+        <button type="submit">Calculate EMI</button>
+      </form>
+      <% if (typeof result !== 'undefined') { %>
+      <h2>EMI: ₹<%= result %></h2>
+      <% } %>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMI Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3da5cff3a5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      body {
+        font-family: "Barlow", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      /* Adjusting the container to be semi-transparent */
+      .container {
+        background: linear-gradient(
+          135deg,
+          #74ebd5,
+          #acb6e5
+        ); /* Semi-transparent background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+        z-index: 2;
+      }
+
+      h1 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 36px;
+        font-weight: 700;
+        animation: fadeIn 1s ease-in;
+      }
+
+      label {
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: block;
+        animation: fadeIn 1.5s ease-in;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        animation: fadeIn 2s ease-in;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        animation: fadeIn 2.5s ease-in;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        color: #28a745;
+        animation: fadeIn 3s ease-in;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Background Chart */
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3; /* Make the chart background more transparent */
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="emiChart"></canvas>
+
+    <div class="container">
+      <h1>EMI Calculator</h1>
+      <form action="/emi" method="post">
+        <div class="form-group">
+          <label for="principal">Principal:</label>
+          <input
+            type="number"
+            name="principal"
+            id="principal"
+            required
+            placeholder="Enter principal amount"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rate">Rate of Interest (%):</label>
+          <input
+            type="number"
+            name="rate"
+            id="rate"
+            required
+            placeholder="Enter rate of interest"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tenure">Tenure (months):</label>
+          <input
+            type="number"
+            name="tenure"
+            id="tenure"
+            required
+            placeholder="Enter tenure in months"
+            min="1"
+          />
+        </div>
+        <button type="submit">Calculate EMI</button>
+      </form>
+      <% if (typeof result !== 'undefined') { %>
+      <h2>EMI: ₹<%= result %></h2>
+      <% } %>
+    </div>
+
+    <script>
+      // Chart.js Code
+      var ctx = document.getElementById("emiChart").getContext("2d");
+      var emiChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], // Sample months
+          datasets: [
+            {
+              label: "EMI Over Months",
+              data: [
+                10000, 12000, 14000, 16000, 18000, 20000, 22000, 24000, 26000,
+                28000,
+              ], // Sample EMI data
+              backgroundColor: "rgba(0, 123, 255, 0.6)",
+              borderColor: "rgba(0, 123, 255, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 5000,
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GST Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3da5cff3a5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Barlow", sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative;
+      }
+
+      .container {
+        background: linear-gradient(
+          135deg,
+          #74ebd5,
+          #acb6e5
+        ); /* Semi-transparent background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+        position: relative;
+        z-index: 2; /* Ensures form is on top of chart */
+      }
+
+      h1 {
+        color: #28a745;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .intro-text {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 30px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .form-group label {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        display: block;
+        color: #333;
+      }
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #74ebd5;
+        box-shadow: 0 0 10px rgba(116, 235, 213, 0.4);
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+      }
+
+      h2 {
+        margin-top: 30px;
+        font-size: 1.8rem;
+        color: #28a745;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Background Chart */
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        opacity: 0.7; /* Make the chart background more transparent */
+      }
+
+      /* Adjust the form for better alignment */
+      .form-container {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gstChart"></canvas>
+
+    <div class="container">
+      <h1>GST Calculator</h1>
+      <div class="intro-text">
+        <p>
+          GST (Goods and Services Tax) is a consumption-based tax applied to
+          goods and services in India. Use this calculator to compute the GST
+          based on the amount and the GST rate you input.
+        </p>
+      </div>
+
+      <!-- GST Calculation Form -->
+      <form action="/gst" method="post">
+        <div class="form-group">
+          <label for="amount">Amount (₹):</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            required
+            placeholder="Enter the amount"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="gstRate">GST Rate (%):</label>
+          <input
+            type="number"
+            name="gstRate"
+            id="gstRate"
+            required
+            placeholder="Enter GST rate"
+            min="0"
+            max="100"
+          />
+        </div>
+        <button type="submit">Calculate GST</button>
+      </form>
+
+      <!-- Result Display -->
+      <% if (typeof result !== 'undefined') { %>
+      <h2>GST: ₹<%= result %></h2>
+      <% } %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Chart.js Code for Background Bar Graph
+      var ctx = document.getElementById("gstChart").getContext("2d");
+      var gstChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["5%", "12%", "18%", "28%"], // Example GST Rates
+          datasets: [
+            {
+              label: "GST Rates",
+              data: [500, 1200, 1800, 2500], // Sample GST Values for different rates
+              backgroundColor: [
+                "rgba(75, 192, 192, 0.6)",
+                "rgba(153, 102, 255, 0.6)",
+                "rgba(255, 159, 64, 0.6)",
+                "rgba(54, 162, 235, 0.6)",
+              ],
+              borderColor: [
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(54, 162, 235, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 500,
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+          animation: {
+            duration: 2000, // 2 seconds
+            easing: "easeInOutQuart",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

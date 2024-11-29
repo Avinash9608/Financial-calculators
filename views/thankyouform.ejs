@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You | Enquiry Submitted</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <style>
+      /* Page Styling */
+      body {
+        background: linear-gradient(to bottom right, #ff7eb3, #feb47b);
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .thankyou-container {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 500px;
+        animation: fadeInUp 1s ease-in-out;
+        text-align: center;
+      }
+
+      .thankyou-container h1 {
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        color: #ff6f61;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .thankyou-container p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #333;
+        animation: fadeIn 1.7s ease-in-out;
+      }
+
+      .btn-back {
+        background: linear-gradient(to right, #ff6f61, #feb47b);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 105, 97, 0.4);
+      }
+
+      .btn-back:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(255, 105, 97, 0.6);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thankyou-container">
+      <h1>Thank You for Your Enquiry!</h1>
+      <p>
+        Your request has been successfully submitted. We will get back to you
+        shortly.
+      </p>
+      <a href="/enquiry" class="btn-back">Go Back</a>
+    </div>
+  </body>
+</html>

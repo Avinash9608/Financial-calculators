@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stylish Animated Enquiry Form</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <style>
+      /* Page Styling */
+      body {
+        background: linear-gradient(
+          to bottom right,
+          rgba(12, 108, 133, 1) 19%,
+          rgba(2, 0, 36, 1) 100%
+        );
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .form-container {
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+        animation: slideIn 1.2s ease-in-out;
+      }
+
+      .form-container::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 150%;
+        height: 150%;
+        background: radial-gradient(
+          circle,
+          #f953c6 10%,
+          rgba(255, 255, 255, 0)
+        );
+        z-index: -1;
+        animation: glowEffect 3s infinite alternate;
+      }
+
+      h2 {
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #b91d73;
+        text-transform: uppercase;
+      }
+
+      .form-control {
+        border-radius: 15px;
+        border: 1px solid #ddd;
+        padding: 12px 15px;
+        font-size: 16px;
+        transition: all 0.4s ease;
+      }
+
+      .form-control:focus {
+        border-color: #b91d73;
+        box-shadow: 0 0 10px rgba(185, 29, 115, 0.5);
+      }
+
+      .form-label {
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: inline-block;
+        color: #333;
+      }
+
+      .btn-primary {
+        background: linear-gradient(to right, #b91d73, #f953c6);
+        border: none;
+        border-radius: 15px;
+        padding: 12px;
+        font-size: 18px;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(to right, #f953c6, #b91d73);
+        transform: scale(1.05);
+      }
+
+      /* Animations */
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes glowEffect {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .form-container input,
+      .form-container textarea {
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+      }
+
+      .form-container input:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+
+      .form-container input:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      .form-container textarea {
+        animation-delay: 0.6s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Enquiry Form</h2>
+      <form action="/enquiry" method="POST">
+        <div class="mb-4">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            class="form-control"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="form-label">Email ID</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter your email address"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="location" class="form-label">Current Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            class="form-control"
+            placeholder="Enter your location"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="message" class="form-label">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            class="form-control"
+            placeholder="Write your message"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
