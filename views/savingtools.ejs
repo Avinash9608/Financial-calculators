@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -191,6 +191,313 @@
       <p>
         &copy; 2024 Smart Saving Tool |
         <a href="/privacy-policy">Privacy Policy</a>
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saving Tool</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/3da5cff3a5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f6f9;
+        overflow-x: hidden;
+      }
+
+      header {
+        background: linear-gradient(
+            rgba(12, 108, 133, 1) 19%,
+            rgba(2, 0, 36, 1) 100%
+          ),
+          url("https://source.unsplash.com/1920x1080/?finance,saving") no-repeat
+            center center/cover;
+        height: 100vh;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      }
+
+      header p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+
+      .cta-button {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        background: #007bff;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+      }
+
+      .cta-button:hover {
+        background-color: #a4aeb9;
+      }
+
+      .features-section {
+        padding: 80px 20px;
+        text-align: center;
+      }
+
+      .features-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .features-section h2::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #007bff;
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
+
+      .feature-card {
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, opacity 0.3s;
+        background: white;
+        padding: 20px;
+        text-align: center;
+        opacity: 0;
+      }
+
+      .feature-card:hover {
+        transform: scale(1.05);
+      }
+
+      .feature-card i {
+        font-size: 3rem;
+        color: #007bff;
+        margin-bottom: 15px;
+      }
+
+      .feature-card img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+        transition: transform 0.3s;
+      }
+
+      .feature-card:hover img {
+        transform: scale(1.2);
+      }
+
+      .footer {
+        background: #0b5c77;
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+      }
+
+      .footer a {
+        color: #a4aeb9;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Animation for appearance */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .feature-card:nth-child(1) {
+        animation: fadeIn 1s ease-out 0.2s forwards;
+      }
+
+      .feature-card:nth-child(2) {
+        animation: fadeIn 1s ease-out 0.4s forwards;
+      }
+
+      .feature-card:nth-child(3) {
+        animation: fadeIn 1s ease-out 0.6s forwards;
+      }
+
+      .feature-card:nth-child(4) {
+        animation: fadeIn 1s ease-out 0.8s forwards;
+      }
+
+      .feature-card:nth-child(5) {
+        animation: fadeIn 1s ease-out 1s forwards;
+      }
+
+      .feature-card:nth-child(6) {
+        animation: fadeIn 1s ease-out 1.2s forwards;
+      }
+
+      .feature-card:nth-child(7) {
+        animation: fadeIn 1s ease-out 1.4s forwards;
+      }
+
+      .feature-card:nth-child(8) {
+        animation: fadeIn 1s ease-out 1.6s forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Smart Saving Tools for Your Financial Goals</h1>
+      <p>Take control of your future by managing your savings effectively.</p>
+      <a href="#features" class="cta-button">Discover Features</a>
+    </header>
+
+    <section id="features" class="features-section">
+      <h2>Our Top Financial Tools</h2>
+      <div class="container">
+        <div class="row">
+          <!-- Mint -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="https://www.underconsideration.com/brandnew/archives/mint_2018_icon.png"
+                alt="Mint"
+              />
+              <h5>Mint</h5>
+              <p>Tool that helps track accounts, bills, and investments.</p>
+            </div>
+          </div>
+
+          <!-- Personal Capital -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="https://th.bing.com/th/id/OIP.jMHl6BbtsUAAEm7rP9ZCQwHaHa?rs=1&pid=ImgDetMain"
+                alt="Personal Capital"
+              />
+              <h5>Personal Capital</h5>
+              <p>Track investments, debts, and income.</p>
+            </div>
+          </div>
+
+          <!-- YNAB -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="https://cdn.prod.website-files.com/640f69143ec11b21d42015c6/6529913f818b1d4d5ce6d46e_6526d4402832750e60198ff7_blurpletree-p-500.png"
+                alt="YNAB"
+              />
+              <h5>YNAB</h5>
+              <p>Manage your finances and stay on top of expenses.</p>
+            </div>
+          </div>
+
+          <!-- Digit -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="https://st3.depositphotos.com/15833800/18583/v/450/depositphotos_185838062-stock-illustration-digit-number-logo-icon-geometrical.jpg"
+                alt="Digit"
+              />
+              <h5>Digit</h5>
+              <p>
+                Automated savings tool that transfers small amounts to savings.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Acorns -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsJCQcJCQcJCQkJCwkJCQkJCQsJCwsMCwsLDA0QDBEODQ4MEhkSJRodJR0ZHxwpKRYlNzU2GioyPi0pMBk7IRP/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCAESAW4DASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAEFBAYHAwL/xABGEAACAQIDAQoKBwgBBQEAAAAAAQIDBAURIdEGEhUxQVFUcYGTExQiU2FykZKhshYjMjVzwtIzQkNSYrHB8CQ0RIKi4fH/xAAaAQEAAgMBAAAAAAAAAAAAAAAAAQYDBAUC/8QAKREBAAIBAgUEAgMBAQAAAAAAAAECAwQREhMhMVEFMlJxQaEiI2Ezsf/aAAwDAQACEQMRAD8A62AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQB7QRoT2fBkAB2fBkdnwYEgdnwY7PgwAI7Pgyez4MkAOz4Mjs+DAkDs+DHZ8GABH+8TJ2gAAAAAAAAAAAAAAAAAAAAADUagANRqAA1GoADUagANRqAA1GoADUgN5FDjWOKy31tauMrtx8uT1jQz51yy/wB68eTJXFXit2Y8uWuKvFaeiyvsTscPinc1cpNZwpQW+qz6o7TWrrdVfVG1aUYUIckqn1lXryfk/BlBOpUqznUqzlOpN76c5tuUn6Wz5OHl1+S/SnSHBzeoZLztTpDMqYrjFVvwl9c9UJuC9lPI8fHL/pl139TaeINOcl5/MtGcuSe9pe3jd90u676ptHjd/wBLuu+q7TxBHMv5k5l/Mvbxu/6Xdd9V2jxu/wCl3Xf1Np4gcy/mTmX8y9vHL7pd131XaPG7/pd131XaeIHMv5k5l/Mvbxu+6Xdd9U2jxu/6Xdd9U2niBzL+TmX8y9vG7/pd131XaPG7/pd131XaeIHMv5k5l/MvdXmIJ5q7uk/RXq7TIo4zjVFre3taS5qrVRf+6ZgAmMt47WlMZckdrS2ez3VzW9hfUM1onVt8816XTf8Ah9hsttd2t3TVW3rRqQfLF6p80lxpnMjItbu6s6yrW1RwmtHyxkuaceJo38OvvWdsnWHQweo3rO2TrDpmo1KvCcWoYlSby8HcQy8NSzzy/qi/5S0O1S9bxxVl3KXrevFWehqNQD29mo1AAajUABqNQAGo1AAajUABoNAAGg0AAaDQABoNAAGg0AAaDQEPMCsxrE1h1q5Qy8ZrNwt09cmlnKbXMjQZSlNynKTlKTcpSnq5N6tt+ksscvHeYjcNPOlQbtqK5N7B5Sfa8/8AUVhXdZmnJk2jtCs63POXJtHaAAjU0WikAAARqSABGpP+6gAXVDAvHrKld2NeTnJSU6Fwo6VI6Sgpw9PoKerTq0alSlVhKFSnLezhNZSi/T/gy3w3pETMdJZsmG+OImY6S+QRqNTEwpAI1AkEajUASAB7W1zXtLilc0ZNVKbz9E48sH6GdEs7uje21G5pPyakdVyxktHF9RzQ2PcteOFevYyk97Wi61JN8VSGkkutZPsOloM80vwT2l1PT880vy57S3HQaAHeWA0GgADQaAANBoAA0GgADQaAAAAAAAAAAAAAAAA8Lut4C1u6/maFWouuMW0e5XY02sKxLJ/wGuxtJnjJO1Zl4vO1Zlz3Xleb5X6eUDaCpSpyASAAAAEEmTaYfiF8/wDi285w4vCS8ikv/OWnszPVa2tO1Y3eq1tadqxuxhqbLQ3J1pZO6vIxzyzjbw3zXo39T9JY09y+CwXlq4qvnqVpJeyGSNyugzW7xs3a+n5rd42eW5RS8Rus/s+OT3q5soQT+J6boMLjd28rmlH/AJNunLTLOpSWsovq41/9La1tLWyoxoW1NU6UXKSim3rJ5t5t5nvkdmuCOVGK3V264I5MYrdXLCTdKu5jCZuUoyuKTk5PyKmaTbz0U00YFbcnVjm7W8jL+mvDev3ofpONfQZq9o3cS/p+avWI3a0QZl3huJWObuLeSgv4lP6yl2yjxdqRiGpalqTtaNmlatqTtaNpAAeHkAAEGVh9Z29/h9Zab24pp+rN+Dl8GYwTylB806b9kkeqTNbRMPdJ4bRMOpEgFthcQAEgAAAAAAAAAAAAAAAAAAAAAAAAV2NfdOJfgP5kWJW41904l+A/mRjy+yfqWPL7J+pc+2gbQVNTwAgCQlNuMYxlKcpKMIxTcpSfFGK5yOtm3bm8KVKEMRuI/XVo/wDHjJfsqL4pZc8uPqM+nwTmvww2NPgnPfhh84VuahFQr4klOrpKFun9VT5frP5n8Os2aMIQioxilGKSSSSSXoRKJLHiw0xRtWFmxYaYq7VgyABmZgAABl1gAQ4p55rrz5TX8T3OW9wqlazUaFw9XHio1HzNLifpRsJBiyYq5Y4bQxZMVMscN4cwq0q1CpUo1oShVpvKcZLJo+DecbwmN/QdWlFK7oxbptcdSK1dN/4NGya0ejTyafGusrup084LbfiVb1WnnBfb8SAEGs1Ejlj60PmQIXHH1ofMiY7pju6mSQiS3QuUAAJSAAAAAAAAAAAAAAAAAAAAAAAAFdjf3TiX4H5kWJW43904l+B+ZGPL7J+pY8vsn6lz7aBtBU1PAABk4fa+O3tnatZwqVM6v4UPLl7csu06TGKikkskkkkksklyI0ncvFSxKrJ/w7So49cpwT/30m7ne9OpEYuLysPptIjFxeZAAdJ0wAAAAAAAAAAQ/Rzmh7oLNWuI1JQWVO5j4xHLiUnpNe3XtN8NX3WxW9wyf7yncQ7MoyNHXUi2GZ8ND1CkWwTPhqoAK6rQP5fWh8yA5Y+tD5kTHdMd3UkSQiS3QuUAAJSAAAAAAAAAAAAAAAAAAAAAAAAFbjf3TiX4H5kWRXY1904l+A/mRjy+yfqWPL7J+pc92gbQVNTwAAWGDXsLC/pVqjypThKjVf8ALGeTUsvQ0bssUwl/9/ad9Dac5NjwLB8Ov7OrXuqc5T8YnTjvak45Rio8kWlznT0WbJ/zpET9upoc+SP6qRE/bY+E8K6fZ99DaOE8J6fZ99DaYX0ZwHzFXv636h9GcB8xV7+t+o6e+f4w6vFqPEftm8J4T0+z76G0cJ4V0+z76G0w/ozgPmKvf1v1EfRnAfMVe/rfqG+f4wcWo8R+2bwnhXTrTvobRwnhXT7PvobTC+jOA+Yq9/W/UPozgPmKvf1v1DfP8YOLUeI/bN4Twrp1n30No4Twnp9n30NphfRnAfMVe/rfqH0ZwHzFXv636hvn+MHFqPEftm8J4T0+076G0cJ4T0+z76G0wvozgPmKvf1v1D6NYD5ir39b9Q3z/GDi1HiP2zeFMJ6fZ99DaarujxC3va9vStpqpStoz304/ZlUm1nvXypZcZYYpgOFWmH3lxQpTVWlCMouVWpJLy0npJ5GpnP1mfLEcu0R1c7XZ8sRy7xEbgAOS44OWPrQ+ZAfy+tD5kTHdMd3UiSESW6FygABKQAAAAAAAAAANBoAA0GgADQaAANBoAA0GgAArsb+6cS/AfzIsStxv7pxL8D8yMeX2T9Sx5fZP1Ln20DaCpqeAAAbnuVa4OqrlV3Wz7VFmmG2bkqmdG/ovLOFenVXVOCj+U39BMRmh0PTp2zNmJALCsgAAAAAAAAAGBWY40sJxL8KK7XOKOf7TeN0tXeYXUh5+tRpLqT8I/7Gj6HB9RnfJEf4r/qVt8kR/iCSCTmuWDlj60PmQI5Y+tD5kTHdMd3U0ToQSW6Fyg0GgBKTQaAANBoAA0GgADQaAAAAAAAAAAAAAAAArsa+6cS/A/MixK3G/unEvwPzIx5fZP1LHl9k/Uue6kkbQVNT0ggASXG5u5VviUYSeULqnKi/Xj5cf8rtKbMmM5wlCcHvZwlGcHzSi98mZcWTl3i8fhlxZJx3i/h1JEmFht9Sv7WjcQyTaUasc9YVV9qOwzS01tFoiYW2totETAAD09AAAAAAGDwubmja29e4rPKnSg5S53yKK9L4kRMxEbyiZiI3lq26q6U69rZxf7GLrVPXqaRXs/ua2e1zcVbq4r3FX9pWqOckuJZ8SXVxHkVfUZOZkmyqajJzck3AAYGuDlj60PmQI5Y+tD5kTHdMd3UySCS3QuUAAJSAAAAAAAAAAAAAAAAAAAAAAAAFdjf3TiWXmH8yLEw8SpOtYYhSSzc7Wqor+pRbRjydaT9Sx5I3pP1Lm6/ySObsYKmp4AAAAAscJxOphtdy1lb1WlXpr4TiudG+UK9C4pQrUakalKa30JR4mjmRmWGJXuHTcrea3knnUpT1pz61yP0nQ0us5X8L9nR0mt5P8L9v/HRwUlluiw25UY1peLVnlnGs/Ib/AKZ8XtyLmMoySlFpxazTUk0+po7lMlckb1nd36ZKZI3rO76BGYz4zIyJBGeSbeiSbbb0XaVN7j+F2ilGNTxistPB27TSf9U/s/36jxe9aRvadni+SuON7zstKlSnShUqVJwhTgnKc5vJRS5WzRsaxd4jUVKjvo2dKWdNPR1Z8XhJL5f9y8MRxa+xKS8K1CgpJwoU21BNcTlytlecTV6zmfwp2cLV67m/14+wADmuWAAAMtYetDL3kD1tqcq11ZUVx1bmhDsc1n8D1WN5iHqsb2iIdNJI5SS2wuUAAJAAAAAAAAAAAAAAAAAAAAAAAAAh8Tz15ySAOb4hays7y6t2nlCpJ08+WnLy4tdhim4bpsOdajG9pRbq28XGqkm3Kjx55L+X/Jp5WNTinFkmFV1WGcOSY/HcABrNUAAAAAD1o3N1b629etSfG/BTlFPrSeXwPIExM1neExaa9YltGD7oJOatsRq5755UrieS1f7lTLTqZlYxj0LWMreynCd1L7VRZShRXofE5GmaE+j+xvRrckY+D8+W/Gvy1x8H7e9e8vbr/qLmtV43lOct72RWnwMckGla026zLRtabdZkAB5eQAAAAALnc3bOviSrZZ07Om6kubwk04RXszZTZNtKKcpSajGMVnKUpPJRS52b/guHcH2VOnNLxir9bcNa/WS/dT5lxf8A6b2ixTkyRP4hv6HDOTLv+IWgALEsoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhpNNNaPR58xpWN4LO0lUurWDlayblUhHV27fLkv3f7dXFuxDSaayWqa1MGfBXNXhlgz4K568NnLCTb8R3M0KznWsXGhVlnKVKX7GT49MuLP0aGs3WH4jZtq5tqkEv30t9TfVOOhX8ulyYp6xvHlXM2lyYZ6x08sYEJxfE12Mk1tmqAACCQAAIAEggkAAAABGcc8s1nnklnq+pBPcD0y0bbaSSWbbfEkucsLTB8Wvd66VvKFN5fW3CdOGT5Un5T9hteGYBZ2DVaf19152aSjDPzUOTr1fpNzDpMmWfENzDosuWd+0MHAcEnQlC+vYZV8s7ejL+Cmvtz/qfwNmJB38WKuKvDVYsWKuGvDUABlZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhpPm9OhIAw6uG4XXedWytZvnlShn7Ujx4DwHoFt7r2lkRkY5xUnvEMc4qT3iFbwFgPQLf3XtHAWA9At/de0sskMkRycfxhHJx/GFbwFgPQLf3XtHAeA9At/de0s8kRkhycfxg5OP4wreAsB6Bb+69o4CwHoFv7r2llkhkhycfxg5OP4wreAsB6Bb+69o4CwHoFv7r2llkhkhycfxg5OP4wreAsB6Bb+69o4CwHoFv7r2llkhkhycfxg5OP4wrVgWAriw+27Yt/BsyqNjYW7zoWtvSfPTpRi/almZGSJJjHSO0QmMdI7RCEsiQDIyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/9k="
+                alt="Acorns"
+              />
+              <h5>Acorns</h5>
+              <p>Invest small amounts into a diversified portfolio.</p>
+            </div>
+          </div>
+
+          <!-- Qapital -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="https://th.bing.com/th/id/OIP.vFD9PwY4NFZhgM4se-QHDQHaEK?rs=1&pid=ImgDetMain"
+                alt="Qapital"
+              />
+              <h5>Qapital</h5>
+              <p>Automated savings to help achieve your financial goals.</p>
+            </div>
+          </div>
+
+          <!-- Wally -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="data:image/png;base64,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"
+                alt="Wally"
+              />
+              <h5>Wally</h5>
+              <p>Track accounts, bills, and investments.</p>
+            </div>
+          </div>
+
+          <!-- Spendee -->
+          <div class="col-md-3 mb-4">
+            <div class="feature-card text-center">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATYAAACjCAMAAAA3vsLfAAABoVBMVEX4+Pj/////vTMAwHb/Rlv/YrAAx/7zqy4Armv7QFL6WaEAtOdHVWH7+/v/W7cAvW8Aw/41RlQ8TFn/uiD/vCsAu2kAs27/NU7/W63/U6r7tjH2ry87S1j/PVT/uBX//vrv8PF3gIgAruUAtOYAxngAzv//9uX/2ev/dLj/mMn/wSr/zXH/wEH/+/PzqB/6S5sAxnH/0Hy9wcWD2rIAqF7P0tUqPk0px4Vkb3j7K0Lj+P/8cn3/m6T/09f/7c//5bn/3qf/2Zj/ptT/rtT/uNn/x+H/7PX/5rz/36j/w9//xVT/hsD/yF7qa6w3sntZ0p2vi5u97NdfrIb2vWb+0eP8jbvGf6H3xHh5oozo+fPcdKjypAOVl5Oa4cF3k4DT8+WprrNhxZlHy5HFv5bLrWORsKBDs89qdH3ivlqowp9exte55fa5wY51xMhNwuuzuLyM07PIwHyJw7rXv2mL1fGq4PVp1/7eP0THyNiyb1z9qrD+vsL7VGNrkWSoepz8ho/hVVrAa4mtf2fYZ4NirNrqVW2BnshdpnCdj7aeiGnSZ2EfMYpeAAAIiElEQVR4nO2d+1caRxTHXQGFABoeuqCgoGI0KjakWFA0aiyaR23TpE0TkkrSpmmSNvaRpK3QpmnT51/dfcGyM3d2VwvZc2bv56ccOJIzn/O9dx4Lu319CIIgCIIgCIIgCIIgCIIgCIIgCIIgCIJwRjgs/G/CYadH8UbpgrEOd06P5s3QVWduMdcDaS4Q1xtpMk6PrJf0zhrH3npUoC04LVTb1iZnNy5sbm1tbV+8uPPumartv+PSm73Rz+6dW4xNxGKxePzsUEIimUzMzV+qutab9agndxfiE7F4v8bZIZ+GJM83f8OGN6fH2H0sh7yx0KHMqE1TN3/Gdd4sSnRyLz5hcEZpk80lfZcstPFWpubStmKxfgpKm5K5HTfFzTRse5A0WJsszjRxfMXNZKAbi6A0ljafLzln1uOcHmk3YYdt8twELI2tTRK37Y64saPWz4iaqTZfYo69kHN6rF2ENcQ9ZtTMtUmBY3Y4p8faPVg1umBmzVybLznP+FB+qhTWNnmZXaDW2nzJK7xrA4e3tEiub4+nTWpwnFfpiaxZapO8gTF2erRdA6pQS2v9/VbaGHlzerRdAxjbZWtr1tp8Cai/OT3arkEPbcGGNRvafAlgPnV6tF2DGtmW+RwqMzZmR5svSW/tnR5tt6Aa967peq1/bHxQZjx5SsHCG7VB5WUFQmpbMsva2GCLljYLcwny43nVdpXd2MYHByFtbHOJ9/bfd4e2C8wS7ZRGaoPFDX0wMzNyzQ3amCWql+dgPp+v1fLJZQkzbwnfh295JNyg7RyjRNtRy9fy1zc3ZpeWqtXqjZ2PTnWoI6L2sWdGtjZ8nn9ts4wS1aXd3DCm58y2Ls6QtU+UqEmM3OJeG2Oh267OzUmB5tKpZdLb0O3RGc2aZ9gwK/CoDQ5bq63VbkLSZC4S3obutKJGxY1HbXDYtKgNbpC2dKpzy7o3adkx02HN2N041AaHTbN2nRU1lfm2N3nZ4TEw3BE3DrVtQWFT59D8TVNpgl6o2rLDoO0u19oga2M2rQnCjuxt+dXoDGnN43mHZ20b0FJXq1DSUaZYLJLbsm3J26fDftqaZ+SAY23QUldb5lJ9rbASWcmQL1657R/1+0dpbR2TAn/agLCpJVqbpSqykApFKG3ht/0yQNz0HRZ32jaAeVQt0S3ST1/xTjQUrReLhLlrijcgbvrSjTttwDw6BpZoJhuJREOhUDQSiYRKhrf2GXHT51LutAEHbUpny28arRUVZy2ihvcOGHHTN1jcaWPWqNFaOKUETSrSlJS2iDFtzLi1mxtv2oAtwhjU2eqStkg9I/1ZXyZTLBSM76rdzaS58aZtl55Ix6FptBQKpQ4FJowqba/ceNMGXOZTJwTCS4TsZ0buwVXanhN40wYsdsFtlaQtZKKNUaXtBS9v2uiJVG1tu7Q2eqGrc8DQ1ppKedO2CM8I1A5B6m2hkok3RnO7z6k2xqqttkRokWfSUCpbZGnzw9pahyC8aWNMpHnKS0jdIaSyh2Dm9hn7K7dr6ytF1P1BKgJl7p7btUF7BIVCSdtfRVfuoDabaZPJ1Evqdj5CeUNtypTAuvLSV8zKxUodVrqst1HW4L1VJ0UpbyliU+q2mZSxbsubXB0VlMNK40u3XLZuY+0SiNM2A4cpSpvbdgnQnjSfr41/ZqKtTqftG5ftSTeJOSEei9U+f/DF1JSJtod0b2OcU3J7AtJ53haPxya+fPQ4ODUVDE49YVo7lKbSFeM3zVmtjdvztvbprqTs8ldf5wYkgjJPCVepUrZeLxQK9ZK0O41mbdUov6e7ysJNUrb47XdPBzQUbVOrBjFyP4tGU6mUsjUNET9r8LvtWoJwNRaLf//g8UAHwWk6btmOC1cR8gTprvuuXF14ZFCmME3HLVOoZ0OquSy51A2zwsbxddInpylrapUGpwWKbCj0kH71HmOLwPNVeYG21orbM0hblnrxGvM7IPo3tfjT9gLQpnY3ehHycGWlRL6mLj5c940jqEq1MiVmUxCtsbnu+21glZ6eVsVZegvvM63x/W1K4RnkLRi05e2WljWgRHn/7u4qVKUtb1PPzawd+Nkl6hnu+D841AZOCrq3p+zb+lR+GDWxxvnvEhhxa9dp8EdYWsNbFn8aZVkz/CyBS22MuGnLkGBQDBzRiWs0y4FAQPx5lGXN8BM/LrUx4qbl7ZdyQCyvNTrul1VtvCzL0iTS4GxAho1Pbay4KXmbVgSJkqe1l5Wjo8rLtUC5LAY00r8Cv+MgplFutYUZ2uTAvWorCogqgQ683t9gb4ILtMFbBYXX5QAbr0T6L8BbxwaBZ23MMs39bi5NBjhoOy+4QxurTF+LshgzaV4v0N4El2hjlGnuj5YbljO5TMn2RpYoP9rohdgzwFvuT9FrA6K9kTcBEfi5xxGwY3oBeGvasSZhsEY2Nr61CTkqbH+nbWr7V4/bMHmjHt610d4C1sK0Mv2n5W34PvTJTo+2a0CDCxu95X6xGza9vcHW+NZG5C1oaz5oYWaNH22M2xV3zAu5V/bD5lXb2wjU1wSO1h/Muzzr3l4fK2xye4PmUM60Mc9sn2vepG3VsbRJ7Y1er/FWoyZ3sF/NnT5B2LzimivuYG/ycA55w6Bvq+xFTTxifx5HNWr6dI7V3IC9bZWdqHEVNotnwTxvHkOb2Fw3+yyuwmb1mKuG16Y4sdkw/ySnx9llrB5F12iKliu3dHnNNGn8hc3GU9XWK2kzc2nRW7F+kp/To+w+lkOWzTVFMU25S6dFsVmxChqf1mw+07XaqKx55UtWaQX5X961yrq9P3Z6hD3B/lNd+6rrjSOZRmPd/uNJ+WtsKvg03BPSS2tOj62XoLWTgc+VPyE9EMe/NIWumnOJM41wF9yF3aUMQRAEQRAEQRAEQRAEQRAEQRAEQRAEQVzBfycuR5FiX+mRAAAAAElFTkSuQmCC"
+                alt="Spendee"
+              />
+              <h5>Spendee</h5>
+              <p>Track and categorize your spending.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Made with love for your financial goals. <br />© 2024 Saving Tool.
+        <a href="#">Privacy Policy</a>
       </p>
     </footer>
 

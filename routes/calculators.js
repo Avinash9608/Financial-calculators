@@ -10,6 +10,7 @@ const fs = require("fs");
 const path = require("path");
 const FinanceRecord = require("../models/FinanceRecord");
 const EnquiryForm = require("../models/EnquiryForm");
+
 // Home route
 router.get("/", calculatorController.getHomePage);
 
@@ -57,6 +58,43 @@ router.post("/incometax", calculatorController.calculateIncomeTax);
 router.get("/hra", calculatorController.getHRAPage);
 router.post("/hra", calculatorController.calculateHRA);
 
+// router.get("/realEstate", (req, res) => {
+//   const properties = [
+//     {
+//       id: 1,
+//       title: "Luxury Villa",
+//       location: "Beverly Hills",
+//       price: "12,000,000",
+//       image:
+//         "https://th.bing.com/th/id/OIP.0iDclZaB1rPeNjmC-hpg7wHaEj?rs=1&pid=ImgDetMain",
+//     },
+//     {
+//       id: 2,
+//       title: "Modern Apartment",
+//       location: "New York City",
+//       price: "3,500,000",
+//       image:
+//         "https://cdn.decorilla.com/online-decorating/wp-content/uploads/2020/07/Sleek-and-transitional-modern-apartment-design-scaled.jpg",
+//     },
+//     {
+//       id: 3,
+//       title: "Beach House",
+//       location: "Miami",
+//       price: "5,200,000",
+//       image:
+//         "https://th.bing.com/th/id/OIP.qrY8gTHEp3dJAetVYB5P_QHaE_?rs=1&pid=ImgDetMain",
+//     },
+//   ];
+
+//   const locationQuery = req.query.location;
+//   const filteredProperties = locationQuery
+//     ? properties.filter((property) =>
+//         property.location.toLowerCase().includes(locationQuery.toLowerCase())
+//       )
+//     : properties;
+
+//   res.render("realEstate", { properties: filteredProperties });
+// });
 router.get("/realEstate", (req, res) => {
   const properties = [
     {
@@ -64,6 +102,10 @@ router.get("/realEstate", (req, res) => {
       title: "Luxury Villa",
       location: "Beverly Hills",
       price: "12,000,000",
+      type: "Villa",
+      bedrooms: 5,
+      bathrooms: 4,
+      area: "5,000 sq ft",
       image:
         "https://th.bing.com/th/id/OIP.0iDclZaB1rPeNjmC-hpg7wHaEj?rs=1&pid=ImgDetMain",
     },
@@ -72,6 +114,10 @@ router.get("/realEstate", (req, res) => {
       title: "Modern Apartment",
       location: "New York City",
       price: "3,500,000",
+      type: "Apartment",
+      bedrooms: 2,
+      bathrooms: 2,
+      area: "1,200 sq ft",
       image:
         "https://cdn.decorilla.com/online-decorating/wp-content/uploads/2020/07/Sleek-and-transitional-modern-apartment-design-scaled.jpg",
     },
@@ -80,21 +126,117 @@ router.get("/realEstate", (req, res) => {
       title: "Beach House",
       location: "Miami",
       price: "5,200,000",
+      type: "Beach House",
+      bedrooms: 3,
+      bathrooms: 3,
+      area: "3,500 sq ft",
       image:
         "https://th.bing.com/th/id/OIP.qrY8gTHEp3dJAetVYB5P_QHaE_?rs=1&pid=ImgDetMain",
     },
   ];
 
-  const locationQuery = req.query.location;
-  const filteredProperties = locationQuery
-    ? properties.filter((property) =>
-        property.location.toLowerCase().includes(locationQuery.toLowerCase())
-      )
-    : properties;
+  // Define services
+  const services = [
+    {
+      title: "Property Valuation",
+      icon: "fas fa-chart-line",
+      description: "Expert property valuation and market analysis",
+    },
+    {
+      title: "Home Loans",
+      icon: "fas fa-home",
+      description: "Helping you find the best home loan options",
+    },
+    {
+      title: "Property Management",
+      icon: "fas fa-building",
+      description: "Comprehensive property management services",
+    },
+    {
+      title: "Real Estate Investment",
+      icon: "fas fa-money-bill-wave",
+      description: "Strategic investment opportunities and advice",
+    },
+    {
+      title: "Legal Assistance",
+      icon: "fas fa-balance-scale",
+      description: "Legal support for property transactions",
+    },
+    {
+      title: "Property Listing",
+      icon: "fas fa-list-alt",
+      description: "Extensive property listing services",
+    },
+  ];
 
-  res.render("realEstate", { properties: filteredProperties });
+  // Extract query parameters
+  const { location, minPrice, maxPrice, type, bedrooms } = req.query;
+
+  // Apply filters
+  let filteredProperties = properties.filter((property) => {
+    // Location filter (case-insensitive)
+    const locationMatch =
+      !location ||
+      property.location.toLowerCase().includes(location.toLowerCase());
+
+    // Price range filter
+    const priceMatch =
+      (!minPrice ||
+        parseInt(property.price.replace(/,/g, "")) >= parseInt(minPrice)) &&
+      (!maxPrice ||
+        parseInt(property.price.replace(/,/g, "")) <= parseInt(maxPrice));
+
+    // Type filter
+    const typeMatch =
+      !type || property.type.toLowerCase() === type.toLowerCase();
+
+    // Bedrooms filter
+    const bedroomsMatch = !bedrooms || property.bedrooms === parseInt(bedrooms);
+
+    return locationMatch && priceMatch && typeMatch && bedroomsMatch;
+  });
+
+  // Sort properties (optional)
+  const sortBy = req.query.sortBy;
+  if (sortBy === "price_asc") {
+    filteredProperties.sort(
+      (a, b) =>
+        parseInt(a.price.replace(/,/g, "")) -
+        parseInt(b.price.replace(/,/g, ""))
+    );
+  } else if (sortBy === "price_desc") {
+    filteredProperties.sort(
+      (a, b) =>
+        parseInt(b.price.replace(/,/g, "")) -
+        parseInt(a.price.replace(/,/g, ""))
+    );
+  }
+
+  // Pagination
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 6;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const paginatedProperties = filteredProperties.slice(startIndex, endIndex);
+
+  // Prepare pagination info
+  const paginationInfo = {
+    currentPage: page,
+    totalProperties: filteredProperties.length,
+    totalPages: Math.ceil(filteredProperties.length / limit),
+    hasNextPage: endIndex < filteredProperties.length,
+    hasPrevPage: startIndex > 0,
+  };
+
+  // Render the page with filtered and paginated properties
+  res.render("realEstate", {
+    properties: paginatedProperties,
+    services: services, // Added services here
+    pagination: paginationInfo,
+    query: req.query,
+  });
 });
-
 router.get("/insurance", (req, res) => res.render("insurance"));
 router.get("/savingtools", (req, res) => res.render("savingtools"));
 router.get("/campersiontools", (req, res) => res.render("campersiontools"));
@@ -117,7 +259,13 @@ router.get("/download", async (req, res) => {
       },
     });
 
-    const filePath = path.join(__dirname, "..", "public", "finance_report.pdf");
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "src",
+      "public",
+      "finance_report.pdf"
+    );
     const writeStream = fs.createWriteStream(filePath, { flags: "w" });
 
     doc.pipe(writeStream);
@@ -178,23 +326,6 @@ router.get("/download", async (req, res) => {
         return; // Exit loop to ensure footer fits
       }
     });
-
-    // Footer (stays on the same page as the table)
-    // doc
-    //   .moveTo(50, doc.page.height - 50)
-    //   .lineTo(doc.page.width - 50, doc.page.height - 50)
-    //   .stroke("#aaaaaa")
-    //   .text("© 2024 Finance App", 50, doc.page.height - 40, { align: "left" })
-    //   .text("Page 1 of 1", doc.page.width - 100, doc.page.height - 40, {
-    //     align: "right",
-    //   });
-    // doc
-    //   .fontSize(10)
-    //   .fillColor("#666666")
-    //   .text("© 2024 Finance App", 50, doc.page.height - 40, { align: "left" });
-    // doc.text("Page 1 of 1", doc.page.width - 100, doc.page.height - 40, {
-    //   align: "right",
-    // });
 
     doc.end();
 
@@ -310,5 +441,176 @@ router.post("/enquiry", async (req, res) => {
     res.status(500).send("An error occurred while submitting your enquiry.");
   }
 });
+
+// // Route to scrape data from Zillow using Apify API
+// router.get("/scrape", async (req, res) => {
+//   const { address, city, state } = req.query; // Extract query parameters
+
+//   // Validate input parameters
+//   if (!address || !city || !state) {
+//     return res
+//       .status(400)
+//       .send("Please provide valid address, city, and state parameters.");
+//   }
+
+//   // Construct Apify API URL
+//   const zillowApiUrl = `https://api.apify.com/v2/actor-runs/Qy8Lw0XRqDAeho8wI?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+
+//   try {
+//     // Pass dynamic input to Apify API
+//     const inputPayload = {
+//       address,
+//       city,
+//       state,
+//     };
+
+//     // Trigger the Apify actor with the provided input
+//     const runResponse = await axios.post(zillowApiUrl, inputPayload);
+//     const { data } = runResponse;
+
+//     // Check if the run started successfully
+//     if (!data || !data.data || !data.data.id) {
+//       return res.status(500).send("Failed to start Apify actor run.");
+//     }
+
+//     const runId = data.data.id;
+
+//     // Construct URL to fetch actor output
+//     const outputUrl = `https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+
+//     // Fetch the actor output
+//     let outputResponse;
+//     let retryCount = 0;
+
+//     // Retry mechanism to wait for data to be ready
+//     while (retryCount < 10) {
+//       outputResponse = await axios.get(outputUrl);
+//       if (outputResponse.data && outputResponse.data.length > 0) {
+//         break;
+//       }
+//       retryCount++;
+//       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait 5 seconds before retrying
+//     }
+
+//     if (
+//       !outputResponse ||
+//       !outputResponse.data ||
+//       outputResponse.data.length === 0
+//     ) {
+//       return res
+//         .status(500)
+//         .send("Actor output not available. Please try again later.");
+//     }
+
+//     // Extract desired data
+//     const outputData = outputResponse.data[0]; // Assuming the first item contains the needed data
+//     const price = outputData.price || "Price not available";
+//     const homeDetails = outputData.address || "Address not found";
+
+//     // Respond with the scraped data
+//     res.json({
+//       address: homeDetails,
+//       price: price,
+//     });
+//   } catch (error) {
+//     console.error("Error scraping Zillow:", error.message);
+//     res.status(500).send("Error scraping Zillow.");
+//   }
+// });
+
+// router.get('/scrape', async (req, res) => {
+//   const { address, city, state } = req.query;
+
+//   if (!address || !city || !state) {
+//     return res
+//       .status(400)
+//       .send('Please provide valid address, city, and state parameters.');
+//   }
+
+//   const zillowApiUrl = `https://api.apify.com/v2/actor-runs/Qy8Lw0XRqDAeho8wI?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+
+//   try {
+//     const inputPayload = {
+//       address,
+//       city,
+//       state,
+//     };
+
+//     const runResponse = await axios.post(zillowApiUrl, inputPayload);
+//     const { data } = runResponse;
+
+//     if (!data || !data.data || !data.data.id) {
+//       return res.status(500).send('Failed to start Apify actor run.');
+//     }
+
+//     const runId = data.data.id;
+//     const outputUrl = `https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+
+//     let outputResponse;
+//     let retryCount = 0;
+
+//     while (retryCount < 10) {
+//       outputResponse = await axios.get(outputUrl);
+//       if (outputResponse.data && outputResponse.data.length > 0) {
+//         break;
+//       }
+//       retryCount++;
+//       await new Promise((resolve) => setTimeout(resolve, 5000));
+//     }
+
+//     if (!outputResponse || !outputResponse.data || outputResponse.data.length === 0) {
+//       return res
+//         .status(500)
+//         .send('Actor output not available. Please try again later.');
+//     }
+
+//     const outputData = outputResponse.data[0];
+//     const price = outputData.price || 'Price not available';
+//     const homeDetails = outputData.address || 'Address not found';
+
+//     res.json({
+//       address: homeDetails,
+//       price: price,
+//     });
+//   } catch (error) {
+//     console.error('Error scraping Zillow:', error.message);
+//     res.status(500).send('Error scraping Zillow.');
+//   }
+// });
+
+// // Create a new route to display the scraped data
+// router.get('/display-data', async (req, res) => {
+//   const address = req.query.address;
+//   const city = req.query.city;
+//   const state = req.query.state;
+
+//   if (!address || !city || !state) {
+//     return res
+//       .status(400)
+//       .send('Please provide valid address, city, and state parameters.');
+//   }
+
+//   try {
+//     const response = await axios.get(`/scrape?address=${address}&city=${city}&state=${state}`);
+//     const data = response.data;
+
+//     res.render('display-data', {
+//       address: data.address,
+//       price: data.price,
+//     });
+//   } catch (error) {
+//     console.error('Error displaying scraped data:', error.message);
+//     res.status(500).send('Error displaying scraped data.');
+//   }
+// });
+
+// // Create a new route to handle the form submission
+// router.post('/submit-form', async (req, res) => {
+//   const address = req.body.address;
+//   const city = req.body.city;
+//   const state = req.body.state;
+
+//   res.redirect(`/display-data?address=${address}&city=${city}&state=${state}`);
+// });
 
 module.exports = router;

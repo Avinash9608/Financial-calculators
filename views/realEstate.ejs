@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -231,5 +231,311 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dream Homes - Real Estate</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles -->
+    <style>
+      :root {
+        --primary-color: #0c6c85;
+        --secondary-color: #007bff;
+        --accent-color: #4a90e2;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .hero-bg {
+        background: linear-gradient(
+            rgba(12, 108, 133, 0.8),
+            rgba(2, 0, 36, 0.8)
+          ),
+          url("https://source.unsplash.com/1920x1080/?real-estate,luxury-home");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .property-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .property-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-card {
+        transition: all 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: scale(1.05);
+        background-color: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <i
+            class="fas fa-home text-3xl text-primary mr-2 text-[var(--primary-color)]"
+          ></i>
+          <h1 class="text-2xl font-bold text-[var(--primary-color)]">
+            Dream Homes
+          </h1>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a
+            href="#"
+            class="text-gray-700 hover:text-[var(--primary-color)] transition"
+            >Home</a
+          >
+          <a
+            href="#properties"
+            class="text-gray-700 hover:text-[var(--primary-color)] transition"
+            >Properties</a
+          >
+          <a
+            href="#services"
+            class="text-gray-700 hover:text-[var(--primary-color)] transition"
+            >Services</a
+          >
+          <a
+            href="/enquiry"
+            class="text-gray-700 hover:text-[var(--primary-color)] transition"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+      class="hero-bg h-screen flex items-center justify-center text-white text-center pt-16"
+    >
+      <div class="container mx-auto px-4">
+        <h1
+          class="text-5xl md:text-6xl font-bold mb-6 animate__animated animate__fadeInDown"
+        >
+          Your Dream Home Awaits
+        </h1>
+        <p
+          class="text-xl mb-10 max-w-2xl mx-auto animate__animated animate__fadeInUp"
+        >
+          Discover the perfect property that matches your lifestyle and
+          aspirations
+        </p>
+
+        <form class="max-w-xl mx-auto">
+          <div class="flex">
+            <input
+              type="text"
+              placeholder="Search by location, city, or neighborhood"
+              class="w-full px-4 py-3 rounded-l-lg text-gray-800"
+            />
+            <button
+              type="submit"
+              class="bg-[var(--secondary-color)] text-white px-6 py-3 rounded-r-lg hover:bg-[var(--accent-color)] transition"
+            >
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    <!-- Featured Properties -->
+    <section id="properties" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl font-bold text-center mb-12 text-[var(--primary-color)]"
+        >
+          Featured Properties
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <% properties.forEach(function(property) { %>
+          <div
+            class="property-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <img
+              src="<%= property.image %>"
+              alt="<%= property.title %>"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold mb-2 text-gray-800">
+                <%= property.title %>
+              </h3>
+              <div class="flex items-center text-gray-600 mb-4">
+                <i
+                  class="fas fa-map-marker-alt text-[var(--secondary-color)] mr-2"
+                ></i>
+                <%= property.location %>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="text-[var(--primary-color)] font-bold">
+                  ₹<%= property.price.toLocaleString() %>
+                </div>
+                <a
+                  href="https://wanderlust-project-uugv.onrender.com/listings"
+                  class="bg-[var(--secondary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--accent-color)] transition"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real Estate Services -->
+    <section id="services" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl font-bold text-center mb-12 text-[var(--primary-color)]"
+        >
+          Our Services
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <% services.forEach(function(service) { %>
+          <div class="service-card bg-gray-100 p-6 rounded-lg text-center">
+            <div class="text-5xl text-[var(--primary-color)] mb-4">
+              <i class="<%= service.icon %>"></i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4"><%= service.title %></h3>
+            <p class="text-gray-600"><%= service.description %></p>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <!-- <div class="container mx-auto px-4">
+        <h2
+          class="text-4xl font-bold text-center mb-12 text-[var(--primary-color)]"
+        >
+          Contact Us
+        </h2>
+
+        <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+          <form action="/enquiry" method="POST">
+            <div class="mb-4">
+              <input
+                type="text"
+                placeholder="Your Name"
+                class="w-full px-4 py-3 border rounded-lg"
+                name="fullName"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                type="email"
+                placeholder="Your Email"
+                class="w-full px-4 py-3 border rounded-lg"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                type="text"
+                id="location"
+                name="location"
+                class="w-full px-4 py-3 border rounded-lg"
+                placeholder="Enter your location"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <textarea
+                placeholder="Your Message"
+                class="w-full px-4 py-3 border rounded-lg"
+                rows="5"
+                name="message"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[var(--secondary-color)] text-white py-3 rounded-lg hover:bg-[var(--accent-color)] transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div> -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--primary-color)] text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Dream Homes</h3>
+            <p>Your trusted partner in finding the perfect home</p>
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+            <ul>
+              <li><a href="#" class="hover:text-gray-200">Home</a></li>
+              <li>
+                <a href="#properties" class="hover:text-gray-200">Properties</a>
+              </li>
+              <li>
+                <a href="#services" class="hover:text-gray-200">Services</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold mb-4">Contact Info</h4>
+            <p><i class="fas fa-phone mr-2"></i> +91 960xxxxx99</p>
+            <p><i class="fas fa-envelope mr-2"></i> support@dreamhomes.com</p>
+          </div>
+        </div>
+        <div class="text-center mt-8 border-t pt-4">
+          &copy; 2024 Dream Homes. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Optional: Add some basic interactivity -->
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -4,14 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Campersion Tools</title>
-    <!-- Include your CSS file here -->
     <link rel="stylesheet" href="/styles/campersiontools.css" />
-    <!-- Google Fonts for additional styling -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Link to Font Awesome for icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -27,6 +24,7 @@
         font-family: "Roboto", sans-serif;
         background-color: #f4f7f6;
         color: #333;
+        scroll-behavior: smooth;
       }
 
       .hero-section {
@@ -45,11 +43,13 @@
       .hero-content h1 {
         font-size: 3em;
         margin-bottom: 20px;
+        animation: fadeInDown 1s;
       }
 
       .hero-content p {
         font-size: 1.5em;
         margin-bottom: 30px;
+        animation: fadeInUp 1s;
       }
 
       .btn-explore {
@@ -64,6 +64,7 @@
 
       .btn-explore:hover {
         background-color: #a4aeb9;
+        transform: scale(1.05);
       }
 
       .tools-section {
@@ -74,6 +75,7 @@
       .section-title {
         font-size: 2.5em;
         margin-bottom: 50px;
+        animation: fadeIn 1s;
       }
 
       .tool-cards {
@@ -91,6 +93,8 @@
         width: 300px;
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
       }
 
       .tool-card:hover {
@@ -130,6 +134,74 @@
           transform: translateY(0);
           opacity: 1;
         }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* New styles for a testimonial section */
+      .testimonial-section {
+        background-color: #e9f5f5;
+        padding: 50px 20px;
+        text-align: center;
+      }
+
+      .testimonial-title {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+      }
+
+      .testimonial-card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        transition: transform 0.3s;
+      }
+
+      .testimonial-card:hover {
+        transform: scale(1.05);
+      }
+
+      .testimonial-card p {
+        font-size: 1.2em;
+        color: #555;
+        margin: 10px 0;
+      }
+
+      .testimonial-card h4 {
+        font-size: 1.5em;
+        margin-top: 10px;
+        color: #0b5c77;
       }
     </style>
   </head>
@@ -173,8 +245,40 @@
             <i class="fas fa-tools"></i>
           </div>
           <h3>BankBuddy</h3>
-          <p>Compare bank accounts and rates.</p>
+          <p>Compare bank accounts and rates.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+      <h2 class="testimonial-title">What Our Users Say</h2>
+      <div
+        class="testimonial-card animate__animated animate__fadeIn animate__delay-1s"
+      >
+        <p>
+          "Campersion Tools has transformed the way I manage my finances. Highly
+          recommend!"
+        </p>
+        <h4>- Alex J.</h4>
+      </div>
+      <div
+        class="testimonial-card animate__animated animate__fadeIn animate__delay-2s"
+      >
+        <p>
+          "The comparison features are incredibly useful. I found the best
+          insurance rates in minutes!"
+        </p>
+        <h4>- Sarah K.</h4>
+      </div>
+      <div
+        class="testimonial-card animate__animated animate__fadeIn animate__delay-3s"
+      >
+        <p>
+          "A must-have for anyone looking to optimize their financial
+          decisions!"
+        </p>
+        <h4>- John D.</h4>
       </div>
     </section>
 
@@ -187,7 +291,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
     <script src="/scripts/campersiontools.js"></script>
     <script>
-      // This script can be used to add more interactivity (e.g., tooltips, dynamic content) if necessary.
       document
         .querySelector(".btn-explore")
         .addEventListener("click", function () {

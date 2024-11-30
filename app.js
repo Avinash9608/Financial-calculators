@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
-
+const axios = require("axios");
+const cheerio = require("cheerio");
 // Initialize dotenv
 dotenv.config();
 const uri = process.env.ATLAS_URI;
