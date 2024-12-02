@@ -4,13 +4,12 @@ const calculatorController = require("../controllers/calculatorController");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 require("dotenv").config();
-// routes/financeRoutes.js
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
 const FinanceRecord = require("../models/FinanceRecord");
 const EnquiryForm = require("../models/EnquiryForm");
-
+const contactingform = require("../models/contactingform");
 // Home route
 router.get("/", calculatorController.getHomePage);
 
@@ -241,7 +240,6 @@ router.get("/insurance", (req, res) => res.render("insurance"));
 router.get("/savingtools", (req, res) => res.render("savingtools"));
 router.get("/campersiontools", (req, res) => res.render("campersiontools"));
 // Route to generate the PDF
-// Route to generate the PDF
 router.get("/download", async (req, res) => {
   try {
     const records = await FinanceRecord.find().sort({ date: -1 });
@@ -421,7 +419,7 @@ router.post("/enquiry", async (req, res) => {
 
     const mailOptions = {
       from: "your-email@gmail.com", // Sender email
-      to: "recipient-email@gmail.com", // Receiver email
+      to: email, // Receiver email
       subject: "New Enquiry Received",
       html: `
         <h3>New Enquiry Details</h3>
@@ -442,175 +440,124 @@ router.post("/enquiry", async (req, res) => {
   }
 });
 
-// // Route to scrape data from Zillow using Apify API
-// router.get("/scrape", async (req, res) => {
-//   const { address, city, state } = req.query; // Extract query parameters
-
-//   // Validate input parameters
-//   if (!address || !city || !state) {
-//     return res
-//       .status(400)
-//       .send("Please provide valid address, city, and state parameters.");
-//   }
-
-//   // Construct Apify API URL
-//   const zillowApiUrl = `https://api.apify.com/v2/actor-runs/Qy8Lw0XRqDAeho8wI?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+// POST request to submit contact form
+// router.post("/contactingform", async (req, res) => {
+//   const { email, message } = req.body;
 
 //   try {
-//     // Pass dynamic input to Apify API
-//     const inputPayload = {
-//       address,
-//       city,
-//       state,
+//     // Save the contact form data to MongoDB
+//     const newContact = new contactingform({ email, message });
+//     await newContact.save();
+
+//     // Send a thank you email to the user
+//     const transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: process.env.EMAIL_USER, // Replace with your email
+//         pass: process.env.EMAIL_PASS, // Your email password or app password
+//       },
+//     });
+
+//     const mailOptions = {
+//       from: process.env.EMAIL_USER,
+//       to: email,
+//       subject: "Thank you for contacting us!",
+//       text: `Dear ${email},\n\nThank you for reaching out to us. We have received your message:\n\n"${message}"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company`,
 //     };
 
-//     // Trigger the Apify actor with the provided input
-//     const runResponse = await axios.post(zillowApiUrl, inputPayload);
-//     const { data } = runResponse;
+//     await transporter.sendMail(mailOptions);
 
-//     // Check if the run started successfully
-//     if (!data || !data.data || !data.data.id) {
-//       return res.status(500).send("Failed to start Apify actor run.");
-//     }
-
-//     const runId = data.data.id;
-
-//     // Construct URL to fetch actor output
-//     const outputUrl = `https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
-
-//     // Fetch the actor output
-//     let outputResponse;
-//     let retryCount = 0;
-
-//     // Retry mechanism to wait for data to be ready
-//     while (retryCount < 10) {
-//       outputResponse = await axios.get(outputUrl);
-//       if (outputResponse.data && outputResponse.data.length > 0) {
-//         break;
-//       }
-//       retryCount++;
-//       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait 5 seconds before retrying
-//     }
-
-//     if (
-//       !outputResponse ||
-//       !outputResponse.data ||
-//       outputResponse.data.length === 0
-//     ) {
-//       return res
-//         .status(500)
-//         .send("Actor output not available. Please try again later.");
-//     }
-
-//     // Extract desired data
-//     const outputData = outputResponse.data[0]; // Assuming the first item contains the needed data
-//     const price = outputData.price || "Price not available";
-//     const homeDetails = outputData.address || "Address not found";
-
-//     // Respond with the scraped data
-//     res.json({
-//       address: homeDetails,
-//       price: price,
+//     // Respond with a success message
+//     res.json({ success: true, message: "Thank you for contacting us!" });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({
+//       success: false,
+//       message: "Error processing your request. Please try again later.",
 //     });
-//   } catch (error) {
-//     console.error("Error scraping Zillow:", error.message);
-//     res.status(500).send("Error scraping Zillow.");
 //   }
 // });
 
-// router.get('/scrape', async (req, res) => {
-//   const { address, city, state } = req.query;
+// Handle form submission for contacting form
+router.post("/contactingform", async (req, res) => {
+  const { email, message } = req.body;
 
-//   if (!address || !city || !state) {
-//     return res
-//       .status(400)
-//       .send('Please provide valid address, city, and state parameters.');
-//   }
+  try {
+    // Save the contact form data to MongoDB
+    const newContact = new contactingform({ email, message });
+    await newContact.save();
 
-//   const zillowApiUrl = `https://api.apify.com/v2/actor-runs/Qy8Lw0XRqDAeho8wI?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+    // Create a transporter object using your email credentials
+    const transporter = nodemailer.createTransport({
+      service: "gmail", // Use Gmail service or replace with another email provider
+      auth: {
+        user: process.env.EMAIL_USER, // Admin email (your email)
+        pass: process.env.EMAIL_PASS, // Email password or app password
+      },
+    });
 
-//   try {
-//     const inputPayload = {
-//       address,
-//       city,
-//       state,
-//     };
+    // Email content to send to the user
+    const mailOptionsToUser = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: email, // Recipient email (user's email)
+      subject: "Thank you for contacting us!",
+      text: `Dear ${email},\n\nThank you for reaching out to us. We have received your message:\n\n"${message}"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company`,
+    };
 
-//     const runResponse = await axios.post(zillowApiUrl, inputPayload);
-//     const { data } = runResponse;
+    // Email content to notify the admin (you)
+    const mailOptionsToAdmin = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: process.env.EMAIL_USER, // Recipient email (admin email)
+      subject: "New Contact Form Submission",
+      html: `
+        <h3>New Contact Form Details</h3>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
+        <p><em>Sent on: ${new Date().toLocaleString()}</em></p>
+      `,
+    };
 
-//     if (!data || !data.data || !data.data.id) {
-//       return res.status(500).send('Failed to start Apify actor run.');
-//     }
+    // Send email to the user
+    await transporter.sendMail(mailOptionsToUser);
 
-//     const runId = data.data.id;
-//     const outputUrl = `https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=apify_api_R5KycvFaEIifzkkLlDG8UADpznWgCH0St44S`;
+    // Send email to admin
+    await transporter.sendMail(mailOptionsToAdmin);
 
-//     let outputResponse;
-//     let retryCount = 0;
+    // Send a JSON response indicating success
+    // res.json({ success: true, message: "Thank you for contacting us!" });
+    res.render("thankyouform");
+  } catch (err) {
+    console.error("Error processing your contact request:", err);
+    res.status(500).json({
+      success: false,
+      message: "Error processing your request. Please try again later.",
+    });
+  }
+});
 
-//     while (retryCount < 10) {
-//       outputResponse = await axios.get(outputUrl);
-//       if (outputResponse.data && outputResponse.data.length > 0) {
-//         break;
-//       }
-//       retryCount++;
-//       await new Promise((resolve) => setTimeout(resolve, 5000));
-//     }
+// Route to handle form submission
+router.get("/map", async (req, res) => {
+  const location = req.body.location;
 
-//     if (!outputResponse || !outputResponse.data || outputResponse.data.length === 0) {
-//       return res
-//         .status(500)
-//         .send('Actor output not available. Please try again later.');
-//     }
+  // Fetch coordinates from Mapbox Geocoding API
+  const response = await fetch(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+      location
+    )}.json?access_token=pk.eyJ1IjoiYXZpbmFzaC05NjA4IiwiYSI6ImNtMm5qazF6NDA2a2EycXF6MW5zbjAwbnQifQ.oN9aV_oz5U13NkBPXb-TgQ`
+  );
+  const data = await response.json();
 
-//     const outputData = outputResponse.data[0];
-//     const price = outputData.price || 'Price not available';
-//     const homeDetails = outputData.address || 'Address not found';
+  // Check if we got a valid response
+  if (data.features && data.features.length > 0) {
+    const coordinates = data.features[0].geometry.coordinates;
+    const lng = coordinates[0];
+    const lat = coordinates[1];
 
-//     res.json({
-//       address: homeDetails,
-//       price: price,
-//     });
-//   } catch (error) {
-//     console.error('Error scraping Zillow:', error.message);
-//     res.status(500).send('Error scraping Zillow.');
-//   }
-// });
-
-// // Create a new route to display the scraped data
-// router.get('/display-data', async (req, res) => {
-//   const address = req.query.address;
-//   const city = req.query.city;
-//   const state = req.query.state;
-
-//   if (!address || !city || !state) {
-//     return res
-//       .status(400)
-//       .send('Please provide valid address, city, and state parameters.');
-//   }
-
-//   try {
-//     const response = await axios.get(`/scrape?address=${address}&city=${city}&state=${state}`);
-//     const data = response.data;
-
-//     res.render('display-data', {
-//       address: data.address,
-//       price: data.price,
-//     });
-//   } catch (error) {
-//     console.error('Error displaying scraped data:', error.message);
-//     res.status(500).send('Error displaying scraped data.');
-//   }
-// });
-
-// // Create a new route to handle the form submission
-// router.post('/submit-form', async (req, res) => {
-//   const address = req.body.address;
-//   const city = req.body.city;
-//   const state = req.body.state;
-
-//   res.redirect(`/display-data?address=${address}&city=${city}&state=${state}`);
-// });
+    // Render the EJS map page with dynamic coordinates
+    res.render("map", { lng, lat });
+  } else {
+    res.send("Location not found. Please try again.");
+  }
+});
 
 module.exports = router;

@@ -7,6 +7,11 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+  <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
   <script
     src="https://kit.fontawesome.com/3da5cff3a5.js"
@@ -151,7 +156,12 @@
   </nav> -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand ms-5 me-5 fs-1 letter-space text-white" href="#"
+      <img
+            src="https://static.vecteezy.com/system/resources/previews/010/262/625/non_2x/square-shape-and-arrow-financial-chart-logo-design-template-icon-simple-illustration-logo-for-financial-company-blue-background-vector.jpg"
+            alt="Website Logo"
+            style="width: 50; height: 50;"
+          />
+      <a class="navbar-brand ms-3 me-5 fs-1 letter-space text-white" href="#"
         >FINANCE CALCULATOR</a
       >
       <button
@@ -431,9 +441,100 @@
     </div>
   </div>
 
+  
   <footer class="bg-dark text-white mt-auto py-4">
-    <div class="container text-center">
-      <p>© 2024 Finance Calculator. All Rights Reserved.</p>
+    <div class="container">
+      <div class="header-section">
+        <!-- Left Side: Logo and Name -->
+        <div class="header-left">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/010/262/625/non_2x/square-shape-and-arrow-financial-chart-logo-design-template-icon-simple-illustration-logo-for-financial-company-blue-background-vector.jpg"
+            alt="Website Logo"
+          />
+          <span>Finance Calculator</span>
+        </div>
+    
+        <!-- Right Side: Tagline -->
+        <div class="header-center ">
+        <b>Your trusted source for financial guidance</b>
+          <form
+          action="/contactingform"
+          method="POST"
+          class="subscription-form d-flex mt-4 gap-3"
+          style="flex-wrap: wrap"
+        >
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter your email"
+            required
+            style="max-width: 200px"
+          />
+          <input
+            type="text"
+            name="message"
+            class="form-control"
+            placeholder="Enter your query/message"
+            required
+            style="max-width: 300px"
+          />
+          <button type="submit" class="btn btn-primary">
+            Subscribe
+          </button>
+        </form>
+        </div>
+      </div>
+    
+      <!-- Subscription Form -->
+     
+    </div>
+  </div>
+</div>
+        
+
+      <!-- Bottom Section: Address, Services, Social Links -->
+      <div class="row">
+        
+        <div class="col-md-4 text-center text-md-left"><b>Address</b> <br>
+          <a href="/map">
+          <i class="fas fa-map-marker-alt text-white mx-2 social-icon" style="font-size: 20px; margin-right: 8px; vertical-align: middle;"></i></a>
+          Lakhna, 804453<br />Patna, Bihar</p>
+        </div>
+        
+        <div class="col-md-4 text-center">
+          <b>Our Services</b>
+          <ul class="list-unstyled">
+            <li>Calculator</li>
+            <li>Public Solution</li>
+          </ul>
+        </div>
+        <div class="col-md-4 text-center text-md-right">
+          <h6><b>Follow Us</b></h6>
+          <a href="https://facebook.com" target="_blank" class="text-white mx-2 social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="text-white mx-2 social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://plus.google.com" target="_blank" class="text-white mx-2 social-icon">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="text-white mx-2 social-icon">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+        
+      </div>
+
+      <!-- Footer Bottom Links -->
+      <div class="row mt-4">
+        <div class="col text-center">
+          <p class="mb-0">© 2024 Finance Calculator. All Rights Reserved.</p>
+          <a href="terms.html" class="text-white mx-2">Terms and Conditions</a>
+          <a href="privacy.html" class="text-white mx-2">Privacy Policy</a>
+        </div>
+      </div>
     </div>
   </footer>
 </body>
@@ -545,11 +646,30 @@
     color: #333;
   }
 
+  /* .section-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    
+  } */
+
   .section-list li {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    padding: 0.5rem; /* Adding some padding for better visuals */
+    border-radius: 8px; /* Rounded corners */
+  }
+
+  .section-list li:hover {
+    background-color: #f0f0f0; /* Light background on hover */
+    transform: scale(1.05); /* Slight zoom-in effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding shadow */
+    color: #3b5b7c; /* Change text color on hover */
+    cursor: pointer; /* Change cursor to pointer */
   }
 
   .section-list i {
@@ -590,4 +710,111 @@
   .carousel-inner .carousel-item img:hover {
     transform: scale(1.1); /* Enlarge the image slightly */
   }
+  .subscription-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .subscription-tagline {
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  .subscription-form input {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .subscription-form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+
+  .subscription-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .subscription-form button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* Animation */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensures responsiveness */
+    gap: 20px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-left img {
+    width: 50px;
+    height: auto;
+    background-color: #0b5c77;
+    border-radius: 5px; /* Adds a slight rounding to the background */
+  }
+
+  .header-left span {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .header-right {
+    font-size: 1.2rem;
+    text-align: right;
+    color: #333;
+    animation: fadeIn 2s ease-in-out; /* Smooth entrance effect */
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .social-icon {
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #007bff !important; /* You can change this to any color you like */
+}
+ 
 </style>

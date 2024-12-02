@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const axios = require("axios");
 const cheerio = require("cheerio");
+
 // Initialize dotenv
 dotenv.config();
 const uri = process.env.ATLAS_URI;

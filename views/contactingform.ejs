@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    try {
+      const response = await fetch("/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Show thank-you message
+        document.getElementById("responseMessage").style.display = "block";
+        form.reset(); // Reset the form fields
+      } else {
+        alert(
+          "There was an issue with your submission. Please try again later."
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an issue with your submission. Please try again later.");
+    }
+  });
+</script>

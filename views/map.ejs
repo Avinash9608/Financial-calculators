@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Location</title>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+  </head>
+  <body>
+    <!-- Display the coordinates -->
+    <div id="map" style="width: 100%; height: 500px"></div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiYXZpbmFzaC05NjA4IiwiYSI6ImNtMm5qazF6NDA2a2EycXF6MW5zbjAwbnQifQ.oN9aV_oz5U13NkBPXb-TgQ"; // Replace with your Mapbox access token
+
+      // Set up the map with default coordinates and zoom level
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [85.1182, 25.5504], // Coordinates for Shishwachak, Punpun, Patna
+        zoom: 12, // Adjust zoom level as needed
+      });
+
+      // Create a marker for the location
+      const marker = new mapboxgl.Marker()
+        .setLngLat([85.1182, 25.5504])
+        .addTo(map);
+
+      // Create a popup with the location name
+      const popup = new mapboxgl.Popup({ offset: 25 })
+        .setText("Shishwachak, Punpun, Patna")
+        .setLngLat([85.1447, 25.4533])
+        .addTo(map);
+
+      // Attach the popup to the marker
+      marker.setPopup(popup);
+    </script>
+  </body>
+</html>
