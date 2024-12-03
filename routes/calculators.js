@@ -400,27 +400,44 @@ router.get("/enquiry", (req, res) => {
 });
 
 // Handle form submission
+// Handle form submission for enquiry form
 router.post("/enquiry", async (req, res) => {
   const { fullName, email, location, message } = req.body;
 
   try {
-    // Save data to MongoDB
+    // Validate input data
+    if (!fullName || !email || !location || !message) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required." });
+    }
+
+    // Save the enquiry data to MongoDB
     const newEnquiry = new EnquiryForm({ fullName, email, location, message });
     await newEnquiry.save();
 
-    // Send Email with Nodemailer
+    // Create a transporter object using your email credentials
     const transporter = nodemailer.createTransport({
-      service: "gmail", // Use your email provider
+      service: "gmail", // Use Gmail service or replace with another email provider
       auth: {
-        user: process.env.EMAIL_USER, // Replace with your email
-        pass: process.env.EMAIL_PASS, // Replace with your email password or app password
+        user: process.env.EMAIL_USER, // Admin email (your email)
+        pass: process.env.EMAIL_PASS, // Email password or app password
       },
     });
 
-    const mailOptions = {
-      from: "your-email@gmail.com", // Sender email
-      to: email, // Receiver email
-      subject: "New Enquiry Received",
+    // Email content to send to the user
+    const mailOptionsToUser = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: email, // Recipient email (user's email)
+      subject: "Thank you for your enquiry!",
+      text: `Dear ${fullName},\n\nThank you for reaching out to us. We have received your enquiry with the following details:\n\nLocation: ${location}\nMessage: "${message}"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company`,
+    };
+
+    // Email content to notify the admin (you)
+    const mailOptionsToAdmin = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: process.env.EMAIL_USER, // Recipient email (admin email)
+      subject: "New Enquiry Submission",
       html: `
         <h3>New Enquiry Details</h3>
         <p><strong>Full Name:</strong> ${fullName}</p>
@@ -431,52 +448,22 @@ router.post("/enquiry", async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    // Send email to the user
+    await transporter.sendMail(mailOptionsToUser);
 
+    // Send email to admin
+    await transporter.sendMail(mailOptionsToAdmin);
+
+    // Render the thank you page
     res.render("thankyouform");
   } catch (err) {
-    console.error("Error processing enquiry:", err);
-    res.status(500).send("An error occurred while submitting your enquiry.");
+    console.error("Error processing your enquiry:", err);
+    res.status(500).json({
+      success: false,
+      message: "Error processing your request. Please try again later.",
+    });
   }
 });
-
-// POST request to submit contact form
-// router.post("/contactingform", async (req, res) => {
-//   const { email, message } = req.body;
-
-//   try {
-//     // Save the contact form data to MongoDB
-//     const newContact = new contactingform({ email, message });
-//     await newContact.save();
-
-//     // Send a thank you email to the user
-//     const transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: process.env.EMAIL_USER, // Replace with your email
-//         pass: process.env.EMAIL_PASS, // Your email password or app password
-//       },
-//     });
-
-//     const mailOptions = {
-//       from: process.env.EMAIL_USER,
-//       to: email,
-//       subject: "Thank you for contacting us!",
-//       text: `Dear ${email},\n\nThank you for reaching out to us. We have received your message:\n\n"${message}"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company`,
-//     };
-
-//     await transporter.sendMail(mailOptions);
-
-//     // Respond with a success message
-//     res.json({ success: true, message: "Thank you for contacting us!" });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({
-//       success: false,
-//       message: "Error processing your request. Please try again later.",
-//     });
-//   }
-// });
 
 // Handle form submission for contacting form
 router.post("/contactingform", async (req, res) => {
