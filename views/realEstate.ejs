@@ -5,175 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real Estate Agency Landing Page</title>
     <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/d117a4c5b8.js"
-      crossorigin="anonymous"
-    ></script>
-    <style>
-      /* General styling */
-      .welcome-message {
-        font-size: 2rem;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: rgb(114 226 255);
-        text-align: center;
-        opacity: 0; /* Make it invisible initially */
-        transform: translateX(-100px); /* Start from the left */
-        animation: welcomeAnimation 2s ease-out forwards;
-      }
-
-      /* Keyframes for the welcome message animation */
-      @keyframes welcomeAnimation {
-        0% {
-          opacity: 0;
-          transform: translateX(-100px);
-        }
-        50% {
-          opacity: 0.5;
-          transform: translateX(10px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      /* Optional: Adding a glow effect to the text */
-      .welcome-message {
-        text-shadow: 0 0 5px #3d768a, 0 0 10px rgba(12, 108, 133, 1),
-          0 0 20px #2f5765;
-      }
-
-      .popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #fff;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        animation: fadeIn 0.3s ease-in-out;
-      }
-
-      .popup-content h3 {
-        margin: 0;
-        color: #333;
-        font-size: 1.2em;
-      }
-
-      .popup-content p {
-        margin: 10px 0;
-        color: #555;
-        font-size: 0.95em;
-      }
-
-      .popup-content button {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-        font-size: 0.9em;
-      }
-
-      .popup-content button:hover {
-        background-color: #0056b3;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      .about p {
-        position: relative; /* Allows pseudo-elements to position relative to this */
-        margin: 10px 0;
-        padding: 5px;
-        font-size: 16px;
-        color: #333;
-        cursor: pointer;
-        transition: all 0.3s ease; /* Smooth transition for hover effects */
-      }
-
-      .about p:hover {
-        color: #007bff; /* Change text color on hover */
-        transform: translateX(10px); /* Slight slide effect on hover */
-      }
-
-      .about p:hover::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 5px;
-        height: 5px;
-        background-color: #007bff; /* Dot color */
-        border-radius: 50%;
-        animation: scaleUp 0.3s ease-in-out forwards; /* Dot scaling effect */
-      }
-
-      @keyframes scaleUp {
-        from {
-          transform: scale(0) translateY(-50%);
-        }
-        to {
-          transform: scale(1) translateY(-50%);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <div class="logo">
-        <img
-          src="https://i.postimg.cc/htCbVtzQ/logo.png"
-          alt="logo"
-          style="filter: brightness(4) grayscale(100%) saturate(0%)"
-        />
       </div>
 
       <nav class="navBar">
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="/enquiry">Contact</a></li>
-          <li><a href="#browse-house">Browse House</a></li>
-          <li><a href="#sell-house">Sell your house</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Browse House</a></li>
+          <li><a href="#">Sell your house</a></li>
         </ul>
       </nav>
 
-      <!-- <div class="login">
-        <button class="btn">Login</button>
-        <button class="btn2">Create Account</button>
-      </div> -->
       <div class="login">
-        <% if (!user) { %>
-        <!-- If the user is not logged in, show Login and Create Account buttons -->
-        <button class="btn" onclick="window.location.href='/login'">
-          Login
-        </button>
-        <button class="btn2" onclick="window.location.href='/register'">
-          Create Account
-        </button>
-        <% } else { %>
-        <!-- If the user is logged in, show the welcome message -->
-        <!-- <h2 style="color: #e8e8e8">Welcome, <%= user.username %>!</h2> -->
-        <h2 class="welcome-message">Welcome, <%= user.username %>!</h2>
-
-        <button class="btn" onclick="window.location.href='/logout'">
-          Logout
-        </button>
-        <% } %>
+        <button  class="btn">Login</button>
+        <button class="btn2">Create Account</button>
       </div>
-    </header>
+    </div>
+    <div id="popupMessage" class="popup">
+      <div class="popup-content">
+        <h3 id="popupHeader">Alert</h3>
+        <p id="popupText"></p>
+        <button onclick="closePopup()">Close</button>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="estate">
+        <h2>Real estate</h2>
+        <p>When you're ready for a change, we're ready to help</p>
+
+
+        <div class="social">
+          <div class="icon">
+            <img src="https://i.postimg.cc/BQwB9Ktm/facebook.png" alt="logo" />
+          </div>
+
+          <div class="icon">
+            <a href="https://www.instagram.com/tns_server_protocal_error/">
+              <img src="https://i.postimg.cc/2SbFzSZr/insta.png" alt="logo" />
+            </a>
+          </div>
+
+          <div class="icon">
+            <a href="https://www.linkedin.com/in/avinash-kumar-653001213/">
+              <img
+                src="https://i.postimg.cc/kg0NDPQ8/linkedin.png"
+                alt="logo"
+              />
+            </a>
+          </div>
+
+          <div class="icon">
+            <a href="https://x.com/Avinashmadhuka">
+              <img src="https://i.postimg.cc/Wz1gxNVR/twitter.png" alt="logo" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about">
+        <h4>Company</h4>
+        <p>About</p>
+        <p>Contact</p>
+        <p>Career</p>
+        <p>Blog</p>
+      </div>
+
+      <div class="about">
+        <h4>Support</h4>
+        <p>Help Center</p>
+        <p>Support</p>
+        <p>Management</p>
+        <p>Privacy & Policy</p>
+      </div>
+
+      <div class="about">
+        <h4>About</h4>
+        <p>Privacy & Policy</p>
+        <p>Terms & Conditions</p>
+        <p>For Businesses</p>
+        <p>Support</p>
+      </div>
+
 
     <div class="main">
       <div class="main-content">
@@ -349,13 +261,11 @@
 
             <div class="box-btn">
               <div class="view">
-                <a href="/housedetails">
-                  <button class="btn">View Details</button></a
-                >
+                <button class="btn">View Details</button>
               </div>
 
               <div class="share">
-                <div class="share-box like">
+                <div class="share-box">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -366,34 +276,7 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
-                    class="share-icon"
                   />
-                  <div class="social-popup">
-                    <a
-                      href="https://www.facebook.com"
-                      target="_blank"
-                      class="facebook"
-                      ><i class="fa-brands fa-facebook"></i
-                    ></a>
-                    <a
-                      href="https://www.twitter.com"
-                      target="_blank"
-                      class="twitter"
-                      ><i class="fa-brands fa-twitter"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      class="linkedin"
-                      ><i class="fa-brands fa-linkedin"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com"
-                      target="_blank"
-                      class="instagram"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -437,13 +320,11 @@
 
             <div class="box-btn">
               <div class="view">
-                <a href="/housedetails">
-                  <button class="btn">View Details</button></a
-                >
+                <button class="btn">View Details</button>
               </div>
 
               <div class="share">
-                <div class="share-box like">
+                <div class="share-box">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -454,34 +335,7 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
-                    class="share-icon"
                   />
-                  <div class="social-popup">
-                    <a
-                      href="https://www.facebook.com"
-                      target="_blank"
-                      class="facebook"
-                      ><i class="fa-brands fa-facebook"></i
-                    ></a>
-                    <a
-                      href="https://www.twitter.com"
-                      target="_blank"
-                      class="twitter"
-                      ><i class="fa-brands fa-twitter"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      class="linkedin"
-                      ><i class="fa-brands fa-linkedin"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com"
-                      target="_blank"
-                      class="instagram"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -525,13 +379,11 @@
 
             <div class="box-btn">
               <div class="view">
-                <a href="/housedetails">
-                  <button class="btn">View Details</button></a
-                >
+                <button class="btn">View Details</button>
               </div>
 
               <div class="share">
-                <div class="share-box like">
+                <div class="share-box">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -542,34 +394,7 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
-                    class="share-icon"
                   />
-                  <div class="social-popup">
-                    <a
-                      href="https://www.facebook.com"
-                      target="_blank"
-                      class="facebook"
-                      ><i class="fa-brands fa-facebook"></i
-                    ></a>
-                    <a
-                      href="https://www.twitter.com"
-                      target="_blank"
-                      class="twitter"
-                      ><i class="fa-brands fa-twitter"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      class="linkedin"
-                      ><i class="fa-brands fa-linkedin"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com"
-                      target="_blank"
-                      class="instagram"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -613,13 +438,11 @@
 
             <div class="box-btn">
               <div class="view">
-                <a href="/housedetails">
-                  <button class="btn">View Details</button></a
-                >
+                <button class="btn">View Details</button>
               </div>
 
               <div class="share">
-                <div class="share-box like">
+                <div class="share-box">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -630,34 +453,7 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
-                    class="share-icon"
                   />
-                  <div class="social-popup">
-                    <a
-                      href="https://www.facebook.com"
-                      target="_blank"
-                      class="facebook"
-                      ><i class="fa-brands fa-facebook"></i
-                    ></a>
-                    <a
-                      href="https://www.twitter.com"
-                      target="_blank"
-                      class="twitter"
-                      ><i class="fa-brands fa-twitter"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      class="linkedin"
-                      ><i class="fa-brands fa-linkedin"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com"
-                      target="_blank"
-                      class="instagram"
-                      ><i class="fa-brands fa-instagram"></i
-                    ></a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -699,26 +495,18 @@
       </div>
 
       <div class="subscribe">
-        <form action="/subscribe" method="POST" id="subscribeForm">
+        <form>
           <img src="https://i.postimg.cc/hjKYYd32/send.png" alt="icon" />
           <input
             type="email"
-            name="email"
             spellcheck="false"
             placeholder="Enter your email"
-            required
           />
           <input type="submit" value="Submit" id="search" />
         </form>
       </div>
     </div>
-    <div id="popupMessage" class="popup">
-      <div class="popup-content">
-        <h3 id="popupHeader">Alert</h3>
-        <p id="popupText"></p>
-        <button onclick="closePopup()">Close</button>
-      </div>
-    </div>
+
     <footer class="footer">
       <div class="estate">
         <h2>Real estate</h2>
@@ -730,24 +518,15 @@
           </div>
 
           <div class="icon">
-            <a href="https://www.instagram.com/tns_server_protocal_error/">
-              <img src="https://i.postimg.cc/2SbFzSZr/insta.png" alt="logo" />
-            </a>
+            <img src="https://i.postimg.cc/2SbFzSZr/insta.png" alt="logo" />
           </div>
 
           <div class="icon">
-            <a href="https://www.linkedin.com/in/avinash-kumar-653001213/">
-              <img
-                src="https://i.postimg.cc/kg0NDPQ8/linkedin.png"
-                alt="logo"
-              />
-            </a>
+            <img src="https://i.postimg.cc/kg0NDPQ8/linkedin.png" alt="logo" />
           </div>
 
           <div class="icon">
-            <a href="https://x.com/Avinashmadhuka">
-              <img src="https://i.postimg.cc/Wz1gxNVR/twitter.png" alt="logo" />
-            </a>
+            <img src="https://i.postimg.cc/Wz1gxNVR/twitter.png" alt="logo" />
           </div>
         </div>
       </div>
@@ -775,7 +554,6 @@
         <p>For Businesses</p>
         <p>Support</p>
       </div>
-
       <div class="store">
         <img src="https://i.postimg.cc/C1TVv5j1/app-store.png" alt="image" />
         <img src="https://i.postimg.cc/763rj4VN/playstore.png" alt="image" />
@@ -1177,6 +955,11 @@
     background-color: var(--button);
     appearance: none;
     color: #aaa;
+
+    border: none;
+    background-color: transparent;
+    appearance: none;
+
   }
 
   .houses .content-house .select-dropdown select:active,
@@ -1807,6 +1590,7 @@
     }
   }
 
+
   .like img.red {
     filter: hue-rotate(-10deg) brightness(0.1) contrast(1.2) saturate(4)
       sepia(1);
@@ -1985,3 +1769,4 @@
     });
   });
 </script>
+
