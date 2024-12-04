@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login or Register</title>
+    <!-- Include your CSS styles here -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        min-width: 100vw;
+      }
+
+      .container {
+        display: flex;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .left-side,
+      .right-side {
+        flex: 1 1 0;
+      }
+
+      .left-side {
+        overflow: hidden;
+        position: relative;
+
+        .left-side-bg {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          bottom: 0px;
+          right: 0px;
+          z-index: 2;
+          opacity: 0.7;
+          background: #7addd6;
+          background: -webkit-linear-gradient(#92ebe4, #37b9b1);
+          background: -o-linear-gradient(#92ebe4, #37b9b1);
+          background: -moz-linear-gradient(#92ebe4, #37b9b1);
+          background: linear-gradient(#92ebe4, #37b9b1);
+          .company-name {
+            margin: 30px;
+            font-size: 28px;
+            font-family: Helvetica, sans-serif;
+            color: #000;
+            opacity: 1;
+          }
+        }
+
+        .left-side-img {
+          width: inherit;
+          height: 100%;
+          position: relative;
+          z-index: 1;
+        }
+      }
+
+      .right-side {
+        position: relative;
+        z-index: 3;
+        background: #093548;
+        background: -webkit-linear-gradient(#15657e, #093548);
+        background: -o-linear-gradient(#15657e, #093548);
+        background: -moz-linear-gradient(#15657e, #093548);
+        background: linear-gradient(#15657e, #093548);
+      }
+
+      .btn-header {
+        font-family: Helvetica, sans-serif;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: #fafafa;
+        border-style: none;
+        border-bottom: 1px solid #47c1b9;
+        background-color: transparent;
+        padding: 10px 0px;
+        border-radius: 0px;
+        cursor: pointer;
+      }
+
+      .sign-in-container {
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 20%;
+        margin-bottom: 15%;
+        background: transparent;
+        color: #fff;
+      }
+
+      .sign-in {
+        width: 50%;
+        float: left;
+      }
+
+      .sign-up {
+        width: 50%;
+        overflow: hidden;
+      }
+
+      .sign-up-information-container {
+        height: 75%;
+        width: 100%;
+        margin-top: 80px;
+        display: none;
+      }
+
+      .prompt-field {
+        font-size: 16px;
+        margin-top: 38px;
+        margin-bottom: 25px;
+      }
+
+      .input-field {
+        width: 100%;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #a09f9f;
+        color: #a09f9f;
+      }
+
+      .btn-signup {
+        font-family: Helvetica, sans-serif;
+        font-size: 18px;
+        letter-spacing: 1px;
+        color: #fafafa;
+        border: none;
+        background-color: #47c1b9;
+        margin-top: 68px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Side Section -->
+      <div class="left-side">
+        <img
+          class="left-side-img"
+          src="https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Image"
+        />
+        <div class="left-side-bg">
+          <div class="company-name">
+            REALESTATE
+            <span style="font-style: italic; color: #fff">FINANCEWEBSITE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Section -->
+      <div class="right-side">
+        <div class="sign-in-container">
+          <div class="sign-in">
+            <button id="signin" class="btn-header active" type="button">
+              Sign In
+            </button>
+          </div>
+          <div class="sign-up">
+            <button id="signup" class="btn-header" type="button">
+              Sign Up
+            </button>
+          </div>
+
+          <!-- Sign Up Form -->
+          <div id="signup-tab" class="sign-up-information-container">
+            <form action="/signup" method="POST">
+              <div class="prompt-field">USERNAME</div>
+              <input
+                type="text"
+                name="username"
+                class="input-field"
+                placeholder="Create a username"
+                required
+              />
+              <div class="prompt-field">PASSWORD</div>
+              <input
+                type="password"
+                name="password"
+                class="input-field"
+                placeholder="*************"
+                required
+              />
+              <div class="prompt-field">E-MAIL ADDRESS</div>
+              <input
+                type="email"
+                name="email"
+                class="input-field"
+                placeholder="Enter your e-mail address"
+                required
+              />
+              <div class="terms-container">
+                <input
+                  type="checkbox"
+                  class="terms-checkbox"
+                  value="terms_checkbox"
+                  required
+                />
+                <label class="terms-prompt"
+                  >I accept the
+                  <span style="border-bottom: 1px solid #47c1b9"
+                    >terms and conditions</span
+                  ></label
+                >
+              </div>
+              <button class="btn-signup" type="submit">
+                SIGN UP <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Sign In Form -->
+          <div id="signin-tab" class="sign-up-information-container">
+            <form action="/signin" method="POST">
+              <div class="prompt-field">USERNAME</div>
+              <input type="text" name="username" class="input-field" required />
+              <div class="prompt-field">PASSWORD</div>
+              <input
+                type="password"
+                name="password"
+                class="input-field"
+                required
+              />
+              <div class="terms-container">
+                <label class="terms-prompt"
+                  ><span style="border-bottom: 1px solid #47c1b9"
+                    >Forgot your password?</span
+                  ></label
+                >
+              </div>
+              <button class="btn-signup" type="submit">
+                SIGN IN <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include your JavaScript here -->
+    <script>
+      // Wait for the document to be ready
+      document.addEventListener("DOMContentLoaded", function () {
+        const signinButton = document.getElementById("signin");
+        const signupButton = document.getElementById("signup");
+        const signinTab = document.getElementById("signin-tab");
+        const signupTab = document.getElementById("signup-tab");
+
+        // Handle sign in button click
+        signinButton.addEventListener("click", function () {
+          signinTab.style.display = "block";
+          signupTab.style.display = "none";
+          signinButton.style.color = "#47C1B9";
+          signupButton.style.color = "#FAFAFA";
+        });
+
+        // Handle sign up button click
+        signupButton.addEventListener("click", function () {
+          signupTab.style.display = "block";
+          signinTab.style.display = "none";
+          signupButton.style.color = "#47C1B9";
+          signinButton.style.color = "#FAFAFA";
+        });
+
+        // Initially show the sign in tab
+        signinTab.style.display = "block";
+        signupTab.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

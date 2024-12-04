@@ -10,6 +10,11 @@ const path = require("path");
 const FinanceRecord = require("../models/FinanceRecord");
 const EnquiryForm = require("../models/EnquiryForm");
 const contactingform = require("../models/contactingform");
+const Record = require("../models/Record");
+const Subscribe = require("../models/subscribe");
+const authRoutes = require("./auth.routes");
+const User = require("../models/user.model");
+const bcrypt = require("bcrypt");
 // Home route
 router.get("/", calculatorController.getHomePage);
 
@@ -95,6 +100,7 @@ router.post("/hra", calculatorController.calculateHRA);
 //   res.render("realEstate", { properties: filteredProperties });
 // });
 router.get("/realEstate", (req, res) => {
+  const user = req.session.user;
   const properties = [
     {
       id: 1,
@@ -234,8 +240,10 @@ router.get("/realEstate", (req, res) => {
     services: services, // Added services here
     pagination: paginationInfo,
     query: req.query,
+    user: user,
   });
 });
+
 router.get("/insurance", (req, res) => res.render("insurance"));
 router.get("/savingtools", (req, res) => res.render("savingtools"));
 router.get("/campersiontools", (req, res) => res.render("campersiontools"));
@@ -400,27 +408,83 @@ router.get("/enquiry", (req, res) => {
 });
 
 // Handle form submission
+// router.post("/enquiry", async (req, res) => {
+//   const { fullName, email, location, message } = req.body;
+
+//   try {
+//     // Save data to MongoDB
+//     const newEnquiry = new EnquiryForm({ fullName, email, location, message });
+//     await newEnquiry.save();
+
+//     // Send Email with Nodemailer
+//     const transporter = nodemailer.createTransport({
+//       service: "gmail", // Use your email provider
+//       auth: {
+//         user: process.env.EMAIL_USER, // Replace with your email
+//         pass: process.env.EMAIL_PASS, // Replace with your email password or app password
+//       },
+//     });
+
+//     const mailOptions = {
+//       from: process.env.EMAIL_USER, // Sender email
+//       to: email, // Receiver email
+//       subject: "New Enquiry Received",
+//       html: `
+//         <h3>New Enquiry Details</h3>
+//         <p><strong>Full Name:</strong> ${fullName}</p>
+//         <p><strong>Email:</strong> ${email}</p>
+//         <p><strong>Location:</strong> ${location}</p>
+//         <p><strong>Message:</strong> ${message}</p>
+//         <p><em>Sent on: ${new Date().toLocaleString()}</em></p>
+//       `,
+//     };
+
+//     await transporter.sendMail(mailOptions);
+
+//     res.render("thankyouform");
+//   } catch (err) {
+//     console.error("Error processing enquiry:", err);
+//     res.status(500).send("An error occurred while submitting your enquiry.");
+//   }
+// });
+// Handle form submission for enquiry form
 router.post("/enquiry", async (req, res) => {
   const { fullName, email, location, message } = req.body;
 
   try {
-    // Save data to MongoDB
+    // Validate input data
+    if (!fullName || !email || !location || !message) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required." });
+    }
+
+    // Save the enquiry data to MongoDB
     const newEnquiry = new EnquiryForm({ fullName, email, location, message });
     await newEnquiry.save();
 
-    // Send Email with Nodemailer
+    // Create a transporter object using your email credentials
     const transporter = nodemailer.createTransport({
-      service: "gmail", // Use your email provider
+      service: "gmail", // Use Gmail service or replace with another email provider
       auth: {
-        user: process.env.EMAIL_USER, // Replace with your email
-        pass: process.env.EMAIL_PASS, // Replace with your email password or app password
+        user: process.env.EMAIL_USER, // Admin email (your email)
+        pass: process.env.EMAIL_PASS, // Email password or app password
       },
     });
 
-    const mailOptions = {
-      from: "your-email@gmail.com", // Sender email
-      to: email, // Receiver email
-      subject: "New Enquiry Received",
+    // Email content to send to the user
+    const mailOptionsToUser = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: email, // Recipient email (user's email)
+      subject: "Thank you for your enquiry!",
+      text: `Dear ${fullName},\n\nThank you for reaching out to us. We have received your enquiry with the following details:\n\nLocation: ${location}\nMessage: "${message}"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company`,
+    };
+
+    // Email content to notify the admin (you)
+    const mailOptionsToAdmin = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: process.env.EMAIL_USER, // Recipient email (admin email)
+      subject: "New Enquiry Submission",
       html: `
         <h3>New Enquiry Details</h3>
         <p><strong>Full Name:</strong> ${fullName}</p>
@@ -431,12 +495,20 @@ router.post("/enquiry", async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    // Send email to the user
+    await transporter.sendMail(mailOptionsToUser);
 
+    // Send email to admin
+    await transporter.sendMail(mailOptionsToAdmin);
+
+    // Render the thank you page
     res.render("thankyouform");
   } catch (err) {
-    console.error("Error processing enquiry:", err);
-    res.status(500).send("An error occurred while submitting your enquiry.");
+    console.error("Error processing your enquiry:", err);
+    res.status(500).json({
+      success: false,
+      message: "Error processing your request. Please try again later.",
+    });
   }
 });
 
@@ -559,5 +631,182 @@ router.get("/map", async (req, res) => {
     res.send("Location not found. Please try again.");
   }
 });
+// Render the form for adding data
+router.get("/addData", (req, res) => {
+  res.render("addData");
+});
 
+// Handle form submission and save data to the database
+router.post("/addData", async (req, res) => {
+  const { name, sales, category } = req.body;
+
+  try {
+    // Create a new record instance
+    const newRecord = new Record({
+      name,
+      sales: parseInt(sales),
+      category,
+    });
+
+    // Save the record to the database
+    await newRecord.save();
+
+    // Redirect to the homepage or records page
+    res.redirect("/datavisualization");
+  } catch (error) {
+    console.error("Error saving record:", error);
+    res.status(500).send("Error saving record.");
+  }
+});
+
+// API endpoint to get records
+router.get("/records", async (req, res) => {
+  try {
+    const records = await db.collection("records").find().toArray();
+    res.json(records);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch records" });
+  }
+});
+
+// GET route for Thank You page
+router.get("/thankyouform", (req, res) => {
+  res.render("thankyouform");
+});
+
+// POST route for subscribing
+router.post("/subscribe", async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: "Please log in first" });
+  }
+  const { email } = req.body;
+  try {
+    // Validate email input
+    if (!email) {
+      return res.status(400).send("Email is required.");
+    }
+
+    // Save the email to the database
+    const newSubscription = new Subscribe({ email });
+    await newSubscription.save();
+    console.log(email);
+
+    // Configure Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail", // Use Gmail or another email provider
+      auth: {
+        user: process.env.EMAIL_USER, // Your email
+        pass: process.env.EMAIL_PASS, // Your email password or app password
+      },
+    });
+
+    // Email content
+    const mailOptions = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: email, // Recipient email
+      subject: "Subscription Confirmation",
+      text: `Dear Subscriber,\n\nThank you for subscribing with the email: ${email}.\n\nWe appreciate your interest and will keep you updated with the latest news and updates.\n\nBest regards,\nYour Team`,
+    };
+
+    // Email content to notify the admin (you)
+    const mailOptionsAdmin = {
+      from: process.env.EMAIL_USER, // Sender email
+      to: process.env.EMAIL_USER, // Recipient email (admin email)
+      subject: "New Contact Form Submission",
+      html: `
+        <h3>Subscrib Form Details</h3>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><em>Sent on: ${new Date().toLocaleString()}</em></p>
+      `,
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptionsAdmin);
+
+    // Redirect to the Thank You page
+    res.redirect("/thankyouform");
+  } catch (error) {
+    console.error("Error processing subscription:", error);
+
+    // Handle duplicate email errors
+    if (error.code === 11000) {
+      return res.status(400).send("This email is already subscribed.");
+    }
+
+    res
+      .status(500)
+      .send("An error occurred while processing your subscription.");
+  }
+});
+
+router.get("/login_register", (req, res) => res.render("login_register"));
+// Signup Route
+router.post("/signup", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  // Check if user already exists
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    return res.status(400).json({ message: "Email is already registered" });
+  }
+
+  // Create a new user
+  const user = new User({
+    username,
+    email,
+    password,
+  });
+
+  try {
+    await user.save();
+    // res.status(201).json({
+    //   message: "User registered successfully",
+    // });
+    req.session.user = {
+      username: user.username,
+      email: user.email,
+    };
+    res.redirect("/realEstate");
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Signin Route
+router.post("/signin", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Store the user in the session
+    req.session.user = {
+      username: user.username,
+      email: user.email,
+    };
+
+    // Option 1: Redirect to realEstate page
+    res.redirect("/realEstate");
+
+    // Option 2: Render realEstate page with user data
+    // res.render("realEstate", { user: req.session.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/housedetails", (req, res) => res.render("housedetails"));
 module.exports = router;

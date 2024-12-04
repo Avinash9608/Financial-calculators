@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Define CSS variables correctly */
+      :root {
+        --color-black: #f59e0b;
+        --color-white: #fff;
+        --color-laughing-orange: #f59e0b;
+        --color-spacescape: #1b1c57;
+        --color-champion-blue: #626687;
+        --color-dusty-chimney: #888b97;
+        --color-brilliant-white: #f0f3fd;
+        --color-genie: #3c4563;
+        --color-liberty-blue: #0e1735;
+        --color-green-teal: #10b981;
+      }
+
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Lexend", sans-serif;
+        animation: fadeIn 1s ease-in-out;
+        background: linear-gradient(
+          90deg,
+          rgba(12, 108, 133, 1) 19%,
+          rgb(137 136 152) 100%
+        );
+      }
+
+      /* Keyframes for animations */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceIcon {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* Page container */
+      .container {
+        max-width: 1440px;
+        min-height: 100vh;
+        margin: 0 auto;
+        box-shadow: 0 1px 4px rgba(var(--color-black), 0.25);
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      /* Section Title */
+      .section-title {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 40px;
+        margin-bottom: 16px;
+        color: var(--color-spacescape);
+        animation: slideUp 1s ease-in-out;
+      }
+
+      .section-title span {
+        position: relative;
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        color: var(--color-laughing-orange);
+      }
+
+      .section-title span::before {
+        content: "";
+        position: absolute;
+        width: 32px;
+        height: 1px;
+        left: -40px;
+        top: 8px;
+        background-color: var(--color-laughing-orange);
+      }
+
+      /* Ready to sell section */
+      .ready-to-sell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 100px;
+      }
+
+      .ready-to-sell__info {
+        max-width: 522px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .house-detail h4 {
+        font-size: 19px;
+        line-height: 22px;
+        color: #aec5c7;
+      }
+
+      .house-detail__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 28px;
+        margin: 16px 0;
+      }
+
+      .house-detail__item {
+        color: #d1d571;
+        animation: bounceIcon 1s ease-in-out infinite;
+      }
+
+      .contact-info {
+        max-width: 440px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .person-card {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      .person-card__name h5 {
+        font-size: 18px;
+        line-height: 24px;
+        color: var(--color-liberty-blue);
+      }
+
+      /* Button Animations */
+      .btn--primary {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 0;
+        color: var(--color-white);
+        background-color: var(--color-green-teal);
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 22px;
+        border-radius: 19px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .btn--primary:hover {
+        background-color: var(--color-champion-blue);
+        transform: scale(1.05);
+      }
+
+      .btn--primary i {
+        margin-right: 8px;
+      }
+
+      .avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 28px;
+        background-color: rgba(var(--color-dusty-chimney), 0.5);
+        animation: bounceIcon 1.5s ease-in-out infinite;
+      }
+
+      /* Fade-in effect for the page content */
+      .ready-to-sell p,
+      .house-detail__item {
+        animation: fadeIn 1.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="ready-to-sell">
+        <div class="ready-to-sell__info">
+          <h2 class="section-title">
+            <span>Ready To Sell</span>
+            Let’s Tour And See Our House!
+          </h2>
+          <p>
+            Houses recommended by our partners that have been curated to become
+            the home of your dreams!
+          </p>
+          <div class="house-detail">
+            <h4>House Detail</h4>
+            <div class="house-detail__grid">
+              <div class="house-detail__item">
+                <i class="fas fa-bed"></i>
+                <span>4 Bedrooms</span>
+              </div>
+              <div class="house-detail__item">
+                <i class="fas fa-bath"></i>
+                <span>2 Bathrooms</span>
+              </div>
+              <div class="house-detail__item">
+                <i class="fas fa-warehouse"></i>
+                <span>1 Carport</span>
+              </div>
+              <div class="house-detail__item">
+                <i class="fas fa-swimming-pool"></i>
+                <span>2 Floors</span>
+              </div>
+            </div>
+          </div>
+          <hr class="divider" />
+          <div class="contact-info">
+            <div class="person-card">
+              <div class="avatar"></div>
+              <div class="person-card__name">
+                <h5>Dianne Russell</h5>
+                <span>Manager Director</span>
+              </div>
+            </div>
+            <button class="btn--primary">
+              <i class="fas fa-phone"></i>&nbsp;Contact Now
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

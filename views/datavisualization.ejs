@@ -1,297 +1,187 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enhanced Data Visualization</title>
-
-    <!-- Include Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    />
-
-    <!-- Include Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-
-    <!-- Include Animate.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <!-- Include Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <style>
-      body {
-        margin: 0;
-        font-family: "Arial", sans-serif;
-        background: linear-gradient(135deg, #4bc0c0, #ff6384);
-        color: #333;
-      }
-
-      .cover {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background: linear-gradient(135deg, #4bc0c0, #ff6384);
-        animation: fadeIn 2s ease-in-out;
-      }
-
-      .cover h1 {
-        font-size: 3.5rem;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      .container {
-        padding: 20px;
-        margin: 0 auto;
-      }
-
-      .chart-container {
-        background: #fcf8f8;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        animation: fadeInUp 1.5s;
-      }
-
-      .chart-container h2 {
-        font-size: 1.5rem;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        background: #fcf8f8;
-        animation: fadeIn 1.5s;
-      }
-
-      th,
-      td {
-        padding: 12px 15px;
-        text-align: left;
-        border: 1px solid #ddd;
-        font-size: 14px;
-      }
-
-      th {
-        background-color: #4bc0c0;
-        color: white;
-      }
-
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-
-      tr:hover {
-        background-color: #e2f0f0;
-      }
-
-      .icon-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin: 20px 0;
-      }
-
-      .icon {
-        font-size: 2rem;
-        color: #ff6384;
-        transition: transform 0.3s;
-      }
-
-      .icon:hover {
-        transform: scale(1.2);
-        color: #4bc0c0;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
   </head>
   <body>
-    <!-- Animated Cover -->
-    <div class="cover">
-      <div>
-        <h1>Welcome to Enhanced Data Visualization</h1>
-        <p class="text-white">Beautiful, Interactive, and Engaging</p>
-        <div class="icon-container">
-          <i class="fas fa-chart-bar icon"></i>
-          <i class="fas fa-chart-line icon"></i>
-          <i class="fas fa-chart-pie icon"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main container -->
     <div class="container">
-      <h1 class="text-center mb-4">Interactive Charts</h1>
-
-      <!-- Charts Section -->
-      <div class="chart-container">
-        <h2>Bar Chart</h2>
-        <canvas id="barChart"></canvas>
-      </div>
-
-      <div class="chart-container">
-        <h2>Line Chart</h2>
-        <canvas id="lineChart"></canvas>
-      </div>
-
-      <div class="chart-container">
-        <h2>Pie Chart</h2>
-        <canvas id="pieChart"></canvas>
-      </div>
-
-      <!-- Data Table Section -->
-      <h2 class="text-center mt-4">Data Table</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Month</th>
-            <th>Income</th>
-            <th>Expense</th>
-            <th>Savings</th>
-          </tr>
-        </thead>
-        <tbody id="data-table-body">
-          <!-- Data will be rendered here -->
-        </tbody>
-      </table>
+      <div id="chart"></div>
+      <div id="chart-two"></div>
+      <div id="chart-three"></div>
+      <div id="chart-four"></div>
     </div>
-
-    <script>
-      // Sample data
-      const financeData = [
-        { month: "January", income: 2000, expense: 1500, savings: 500 },
-        { month: "February", income: 2200, expense: 1800, savings: 400 },
-        { month: "March", income: 2500, expense: 2000, savings: 500 },
-      ];
-
-      // Prepare chart data
-      const labels = financeData.map((item) => item.month);
-      const incomeData = financeData.map((item) => item.income);
-      const expenseData = financeData.map((item) => item.expense);
-      const savingsData = financeData.map((item) => item.savings);
-
-      const data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Monthly Income",
-            data: incomeData,
-            backgroundColor: "rgba(75, 192, 192, 0.6)",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-          },
-          {
-            label: "Monthly Expenses",
-            data: expenseData,
-            backgroundColor: "rgba(255, 99, 132, 0.6)",
-            borderColor: "rgba(255, 99, 132, 1)",
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      // Bar Chart
-      new Chart(document.getElementById("barChart"), {
-        type: "bar",
-        data: data,
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      // Line Chart
-      new Chart(document.getElementById("lineChart"), {
-        type: "line",
-        data: data,
-        options: {
-          responsive: true,
-        },
-      });
-
-      // Pie Chart
-      new Chart(document.getElementById("pieChart"), {
-        type: "pie",
-        data: {
-          labels: ["Income", "Expense", "Savings"],
-          datasets: [
-            {
-              data: [
-                incomeData.reduce((a, b) => a + b, 0),
-                expenseData.reduce((a, b) => a + b, 0),
-                savingsData.reduce((a, b) => a + b, 0),
-              ],
-              backgroundColor: [
-                "rgba(75, 192, 192, 0.6)",
-                "rgba(255, 99, 132, 0.6)",
-                "rgba(54, 162, 235, 0.6)",
-              ],
-              borderColor: [
-                "rgba(75, 192, 192, 1)",
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-              ],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-        },
-      });
-
-      // Populate the Data Table
-      const tableBody = document.getElementById("data-table-body");
-      financeData.forEach((item) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.month}</td>
-          <td>${item.income}</td>
-          <td>${item.expense}</td>
-          <td>${item.savings}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    </script>
+    <button onclick="window.location.href='/addData'" class="btn">
+      Add Record
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   </body>
 </html>
+<style>
+  body {
+    background-color: aqua;
+  }
+  .container {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    margin: 0 auto;
+    background: linear-gradient(
+      120deg,
+      rgb(137 212 232) 19%,
+      rgb(202 201 228) 100%
+    );
+    border-radius: 10px;
+  }
+  .btn {
+    display: block;
+    margin: 1em auto;
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+<script>
+  const options = {
+    chart: {
+      type: "line",
+    },
+    series: [
+      {
+        name: "sales",
+        data: [45, 61978, 163185, 22258, 1579, 7, 0, 0, 0, 0],
+      },
+    ],
+    xaxis: {
+      categories: [
+        "0 - 500",
+        "500 - 1000",
+        "1000 - 1500",
+        "1500 - 2000",
+        "2000 - 2500",
+        "2500 - 3000",
+        "3000 - 3500",
+        "3500 - 4000",
+        "4000 - 4500",
+        "4500 - 5000",
+      ],
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "dark",
+        gradientToColors: ["#FDD835"],
+        shadeIntensity: 1,
+        type: "horizontal",
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100],
+      },
+    },
+  };
+
+  const chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
+
+  const data = {
+    chart: {
+      type: "bar",
+    },
+    series: [
+      {
+        name: "sales",
+        data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+      },
+    ],
+    xaxis: {
+      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+    },
+  };
+
+  const chartTwo = new ApexCharts(document.querySelector("#chart-two"), data);
+  chartTwo.render();
+
+  const area = {
+    chart: {
+      type: "area",
+    },
+    series: [
+      {
+        name: "sales",
+        data: [45, 61978, 163185, 22258, 1579, 7, 0, 0, 0, 0],
+      },
+    ],
+    xaxis: {
+      categories: [
+        "0 - 500",
+        "500 - 1000",
+        "1000 - 1500",
+        "1500 - 2000",
+        "2000 - 2500",
+        "2500 - 3000",
+        "3000 - 3500",
+        "3500 - 4000",
+        "4000 - 4500",
+        "4500 - 5000",
+      ],
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "dark",
+        gradientToColors: ["#FDD835"],
+        shadeIntensity: 1,
+        type: "horizontal",
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100],
+      },
+    },
+  };
+
+  const chartThree = new ApexCharts(
+    document.querySelector("#chart-three"),
+    area
+  );
+  chartThree.render();
+
+  const pie = {
+    chart: {
+      type: "scatter",
+    },
+    series: [
+      {
+        name: "sales",
+        data: [45, 61978, 163185, 22258, 1579, 7, 0, 0, 0, 0],
+      },
+    ],
+    xaxis: {
+      categories: [
+        "0 - 500",
+        "500 - 1000",
+        "1000 - 1500",
+        "1500 - 2000",
+        "2000 - 2500",
+        "2500 - 3000",
+        "3000 - 3500",
+        "3500 - 4000",
+        "4000 - 4500",
+        "4500 - 5000",
+      ],
+    },
+  };
+
+  const chartFour = new ApexCharts(document.querySelector("#chart-four"), pie);
+  chartFour.render();
+</script>

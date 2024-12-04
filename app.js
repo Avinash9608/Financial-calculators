@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const axios = require("axios");
 const cheerio = require("cheerio");
-
+const session = require("express-session");
 // Initialize dotenv
 dotenv.config();
 const uri = process.env.ATLAS_URI;
@@ -32,6 +32,14 @@ mongoose
   .catch((err) => console.log("Error connecting to MongoDB:", err));
 
 // Routes
+app.use(
+  session({
+    secret: process.env.JWT_SECRET, // A secret key for encrypting session data
+    resave: false, // Prevents resaving session if unmodified
+    saveUninitialized: true, // Forces session to be saved even if not modified
+  })
+);
+
 const calculatorRoutes = require("./routes/calculators");
 app.use("/", calculatorRoutes);
 
