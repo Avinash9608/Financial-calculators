@@ -5,87 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real Estate Agency Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/d117a4c5b8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="https://i.postimg.cc/htCbVtzQ/logo.png"
+          alt="logo"
+          style="filter: invert(1) brightness(1)"
+        />
       </div>
 
       <nav class="navBar">
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/enquiry">Contact</a></li>
           <li><a href="#">Browse House</a></li>
           <li><a href="#">Sell your house</a></li>
         </ul>
       </nav>
 
       <div class="login">
-        <button  class="btn">Login</button>
-        <button class="btn2">Create Account</button>
-      </div>
-    </div>
-    <div id="popupMessage" class="popup">
-      <div class="popup-content">
-        <h3 id="popupHeader">Alert</h3>
-        <p id="popupText"></p>
-        <button onclick="closePopup()">Close</button>
-      </div>
-    </div>
-    <footer class="footer">
-      <div class="estate">
-        <h2>Real estate</h2>
-        <p>When you're ready for a change, we're ready to help</p>
+        <!-- <button class="btn">Login</button>
+        <button class="btn2">Create Account</button> -->
 
-
-        <div class="social">
-          <div class="icon">
-            <img src="https://i.postimg.cc/BQwB9Ktm/facebook.png" alt="logo" />
-          </div>
-
-          <div class="icon">
-            <a href="https://www.instagram.com/tns_server_protocal_error/">
-              <img src="https://i.postimg.cc/2SbFzSZr/insta.png" alt="logo" />
-            </a>
-          </div>
-
-          <div class="icon">
-            <a href="https://www.linkedin.com/in/avinash-kumar-653001213/">
-              <img
-                src="https://i.postimg.cc/kg0NDPQ8/linkedin.png"
-                alt="logo"
-              />
-            </a>
-          </div>
-
-          <div class="icon">
-            <a href="https://x.com/Avinashmadhuka">
-              <img src="https://i.postimg.cc/Wz1gxNVR/twitter.png" alt="logo" />
-            </a>
-          </div>
+        <% if (user) { %>
+        <div class="welcome-message">
+          <h1>Welcome, <%= user.username %>!</h1>
+          <button id="logout-btn">Logout</button>
         </div>
+        <% } else { %>
+        <div class="login">
+          <button class="btn">Login</button>
+          <button class="btn2">Create Account</button>
+        </div>
+        <% } %>
       </div>
-
-      <div class="about">
-        <h4>Company</h4>
-        <p>About</p>
-        <p>Contact</p>
-        <p>Career</p>
-        <p>Blog</p>
-      </div>
-
-      <div class="about">
-        <h4>Support</h4>
-        <p>Help Center</p>
-        <p>Support</p>
-        <p>Management</p>
-        <p>Privacy & Policy</p>
-      </div>
-
-      <div class="about">
-        <h4>About</h4>
-        <p>Privacy & Policy</p>
-        <p>Terms & Conditions</p>
-        <p>For Businesses</p>
-        <p>Support</p>
-      </div>
-
+    </header>
 
     <div class="main">
       <div class="main-content">
@@ -201,14 +161,14 @@
           aspirations, and anxieties, tailoring our services to create a
           personalized experience that reflects your individuality
         </p>
-        <button class="btn-exp">Explore More</button>
+        <a href="/enquiry"><button class="btn-exp">Explore More</button></a>
       </div>
     </div>
 
     <div class="houses">
       <div class="content-house">
         <div class="text-house">
-          <h2 style="color: #757779">Our trending latest property</h2>
+          <h2>Our trending latest property</h2>
           <p>
             Our latest listings feature properties in sought-after locations,
             with unique designs and sustainable features that cater to the
@@ -261,11 +221,13 @@
 
             <div class="box-btn">
               <div class="view">
-                <button class="btn">View Details</button>
+                <a href="/housedetails"
+                  ><button class="btn">View Details</button></a
+                >
               </div>
 
               <div class="share">
-                <div class="share-box">
+                <div class="share-box like">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -276,7 +238,34 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
+                    class="share-icon"
                   />
+                  <div class="social-popup">
+                    <a
+                      href="https://www.facebook.com"
+                      target="_blank"
+                      class="facebook"
+                      ><i class="fa-brands fa-facebook"></i
+                    ></a>
+                    <a
+                      href="https://www.twitter.com"
+                      target="_blank"
+                      class="twitter"
+                      ><i class="fa-brands fa-twitter"></i
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com"
+                      target="_blank"
+                      class="linkedin"
+                      ><i class="fa-brands fa-linkedin"></i
+                    ></a>
+                    <a
+                      href="https://www.instagram.com"
+                      target="_blank"
+                      class="instagram"
+                      ><i class="fa-brands fa-instagram"></i
+                    ></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -320,11 +309,13 @@
 
             <div class="box-btn">
               <div class="view">
-                <button class="btn">View Details</button>
+                <a href="/housedetails"
+                  ><button class="btn">View Details</button></a
+                >
               </div>
 
               <div class="share">
-                <div class="share-box">
+                <div class="share-box like">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -335,7 +326,34 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
+                    class="share-icon"
                   />
+                  <div class="social-popup">
+                    <a
+                      href="https://www.facebook.com"
+                      target="_blank"
+                      class="facebook"
+                      ><i class="fa-brands fa-facebook"></i
+                    ></a>
+                    <a
+                      href="https://www.twitter.com"
+                      target="_blank"
+                      class="twitter"
+                      ><i class="fa-brands fa-twitter"></i
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com"
+                      target="_blank"
+                      class="linkedin"
+                      ><i class="fa-brands fa-linkedin"></i
+                    ></a>
+                    <a
+                      href="https://www.instagram.com"
+                      target="_blank"
+                      class="instagram"
+                      ><i class="fa-brands fa-instagram"></i
+                    ></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -379,11 +397,13 @@
 
             <div class="box-btn">
               <div class="view">
-                <button class="btn">View Details</button>
+                <a href="/housedetails"
+                  ><button class="btn">View Details</button></a
+                >
               </div>
 
               <div class="share">
-                <div class="share-box">
+                <div class="share-box like">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -394,7 +414,34 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
+                    class="share-icon"
                   />
+                  <div class="social-popup">
+                    <a
+                      href="https://www.facebook.com"
+                      target="_blank"
+                      class="facebook"
+                      ><i class="fa-brands fa-facebook"></i
+                    ></a>
+                    <a
+                      href="https://www.twitter.com"
+                      target="_blank"
+                      class="twitter"
+                      ><i class="fa-brands fa-twitter"></i
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com"
+                      target="_blank"
+                      class="linkedin"
+                      ><i class="fa-brands fa-linkedin"></i
+                    ></a>
+                    <a
+                      href="https://www.instagram.com"
+                      target="_blank"
+                      class="instagram"
+                      ><i class="fa-brands fa-instagram"></i
+                    ></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -438,11 +485,13 @@
 
             <div class="box-btn">
               <div class="view">
-                <button class="btn">View Details</button>
+                <a href="/housedetails"
+                  ><button class="btn">View Details</button></a
+                >
               </div>
 
               <div class="share">
-                <div class="share-box">
+                <div class="share-box like">
                   <img
                     src="https://i.postimg.cc/CL1hWTpG/like.png"
                     alt="icon"
@@ -453,7 +502,34 @@
                   <img
                     src="https://i.postimg.cc/vBhyNXP2/share.png"
                     alt="icon"
+                    class="share-icon"
                   />
+                  <div class="social-popup">
+                    <a
+                      href="https://www.facebook.com"
+                      target="_blank"
+                      class="facebook"
+                      ><i class="fa-brands fa-facebook"></i
+                    ></a>
+                    <a
+                      href="https://www.twitter.com"
+                      target="_blank"
+                      class="twitter"
+                      ><i class="fa-brands fa-twitter"></i
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com"
+                      target="_blank"
+                      class="linkedin"
+                      ><i class="fa-brands fa-linkedin"></i
+                    ></a>
+                    <a
+                      href="https://www.instagram.com"
+                      target="_blank"
+                      class="instagram"
+                      ><i class="fa-brands fa-instagram"></i
+                    ></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -495,18 +571,24 @@
       </div>
 
       <div class="subscribe">
-        <form>
+        <form action="/subscribe" method="POST" id="subscribeForm">
           <img src="https://i.postimg.cc/hjKYYd32/send.png" alt="icon" />
           <input
             type="email"
             spellcheck="false"
             placeholder="Enter your email"
+            name="email"
+            required
           />
           <input type="submit" value="Submit" id="search" />
         </form>
       </div>
     </div>
 
+    <div id="popupMessage" class="popup">
+      <p id="popupText"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
     <footer class="footer">
       <div class="estate">
         <h2>Real estate</h2>
@@ -554,6 +636,7 @@
         <p>For Businesses</p>
         <p>Support</p>
       </div>
+
       <div class="store">
         <img src="https://i.postimg.cc/C1TVv5j1/app-store.png" alt="image" />
         <img src="https://i.postimg.cc/763rj4VN/playstore.png" alt="image" />
@@ -587,7 +670,6 @@
       rgba(2, 0, 36, 1) 100%
     );
   }
-
   .header {
     display: flex;
     justify-content: space-between;
@@ -899,6 +981,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 6%;
+    color: var(--navbar-color);
   }
 
   .houses .content-house .text-house {
@@ -951,15 +1034,10 @@
     font-weight: normal;
     max-width: 100%;
     padding: 8px 24px 8px 10px;
+    border-radius: 30px;
+    background-color: #5592d2;
     border-radius: 50px;
-    background-color: var(--button);
     appearance: none;
-    color: #aaa;
-
-    border: none;
-    background-color: transparent;
-    appearance: none;
-
   }
 
   .houses .content-house .select-dropdown select:active,
@@ -1589,11 +1667,172 @@
       width: 340px;
     }
   }
+  .welcome-message {
+    text-align: center;
+    margin-top: 20px;
+  }
 
+  #welcome-text {
+    font-size: 24px;
+    color: #3c4563;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .logout-btn {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f59e0b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .logout-btn:hover {
+    background-color: #e09b0b;
+  }
+  /* Welcome Message Animation */
+  /* General styling */
+  .welcome-message {
+    font-size: 2rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #e8e8e8;
+    text-align: center;
+    opacity: 0; /* Make it invisible initially */
+    transform: translateX(-100px); /* Start from the left */
+    animation: welcomeAnimation 2s ease-out forwards;
+  }
+
+  /* Keyframes for the welcome message animation */
+  @keyframes welcomeAnimation {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateX(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Optional: Adding a glow effect to the text */
+  .welcome-message {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Logout Button Styling */
+  #logout-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background: linear-gradient(45deg, #ea6262, #f94d5c);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Hover Effects for Button */
+  #logout-btn:hover {
+    background: linear-gradient(45deg, #ff8a8a, #fc6b6d);
+    transform: scale(1.1);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Keyframes for Welcome Message Animation */
+  @keyframes fadeInSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .popup p {
+    margin: 0 0 10px;
+  }
+
+  .popup button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .popup button:hover {
+    background-color: #0056b3;
+  }
+
+  .about p {
+    position: relative; /* Allows pseudo-elements to position relative to this */
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+  }
+
+  .about p:hover {
+    color: #007bff; /* Change text color on hover */
+    transform: translateX(10px); /* Slight slide effect on hover */
+  }
+
+  .about p:hover::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #007bff; /* Dot color */
+    border-radius: 50%;
+    animation: scaleUp 0.3s ease-in-out forwards; /* Dot scaling effect */
+  }
+
+  @keyframes scaleUp {
+    from {
+      transform: scale(0) translateY(-50%);
+    }
+    to {
+      transform: scale(1) translateY(-50%);
+    }
+  }
+
+  .like img {
+    width: 20px; /* Adjust the size of the icon */
+    height: auto;
+    cursor: pointer;
+    transition: filter 0.3s ease; /* Smooth color change */
+  }
 
   .like img.red {
-    filter: hue-rotate(-10deg) brightness(0.1) contrast(1.2) saturate(4)
-      sepia(1);
+    filter: hue-rotate(80deg) brightness(9) contrast(0.2) saturate(03) sepia(1);
     transform: scale(1.1);
   }
 
@@ -1680,15 +1919,157 @@
   .share-icon:hover {
     transform: rotate(15deg);
   }
+
+  .navBar {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .navBar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  .navBar li {
+    position: relative; /* Required for hover effects like underline animation */
+  }
+
+  .navBar a {
+    text-decoration: none;
+    color: #333; /* Initial text color */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+
+  .navBar a:hover {
+    color: #f59e0b; /* Change color on hover */
+  }
+
+  /* Underline effect on hover */
+  .navBar a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #f59e0b; /* Same color as hover text */
+    transition: width 0.3s ease; /* Smooth underline animation */
+  }
+
+  .navBar a:hover::after {
+    width: 100%; /* Full-width underline on hover */
+  }
+
+  .select-btn {
+    display: inline-block;
+    width: 50px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .select-btn img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover Effect */
+  .select-btn:hover {
+    transform: scale(1.1); /* Slightly enlarge the container */
+    background-color: rgba(245, 158, 11, 0.1); /* Optional highlight effect */
+    border-radius: 50%; /* Make it circular during hover */
+  }
+
+  .select-btn:hover img {
+    transform: rotate(20deg) scale(1.2); /* Rotate and scale image on hover */
+  }
+
+  .card {
+    width: 300px; /* Adjust width */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .card:hover,
+  .box:hover {
+    transform: translateY(-10px); /* Lift the card slightly */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Add a deeper shadow */
+  }
+
+  .icon-img {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px auto;
+  }
+
+  .icon-img img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .icon-img img {
+    transform: rotate(15deg) scale(1.1); /* Rotate and scale the image */
+  }
+
+  h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1b1c57;
+    transition: color 0.3s ease;
+  }
+
+  .card:hover h3 {
+    color: #f59e0b; /* Change heading color on hover */
+  }
+
+  p {
+    font-size: 14px;
+    color: #626687;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+  }
+
+  .card:hover p {
+    color: #3c4563; /* Change text color on hover */
+  }
 </style>
 <script>
-  // Add event listeners to buttons
-  document.querySelector(".btn").addEventListener("click", () => {
-    window.location.href = "/login_register"; // Redirect to the route for login_register.ejs
+  // // Add event listeners to buttons
+  // document.querySelector(".btn").addEventListener("click", () => {
+  //   window.location.href = "/login_register"; // Redirect to the route for login_register.ejs
+  // });
+
+  // document.querySelector(".btn2").addEventListener("click", () => {
+  //   window.location.href = "/login_register"; // Redirect to the same route
+  // });
+  document.querySelector(".btn")?.addEventListener("click", () => {
+    window.location.href = "/login_register"; // Redirect to login/register page
   });
 
-  document.querySelector(".btn2").addEventListener("click", () => {
-    window.location.href = "/login_register"; // Redirect to the same route
+  document.querySelector(".btn2")?.addEventListener("click", () => {
+    window.location.href = "/login_register"; // Redirect to login/register page
+  });
+
+  document.querySelector("#logout-btn")?.addEventListener("click", async () => {
+    try {
+      await fetch("/logout", { method: "POST" });
+      window.location.reload(); // Reload to update UI
+    } catch (err) {
+      console.error("Error logging out:", err);
+    }
   });
 
   document
@@ -1769,4 +2150,3 @@
     });
   });
 </script>
-

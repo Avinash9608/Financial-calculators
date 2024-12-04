@@ -15,6 +15,7 @@ const Subscribe = require("../models/subscribe");
 const authRoutes = require("./auth.routes");
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
+const { body, validationResult } = require("express-validator");
 // Home route
 router.get("/", calculatorController.getHomePage);
 
@@ -663,72 +664,70 @@ router.post("/subscribe", async (req, res) => {
   }
 });
 
-router.get("/login_register", (req, res) => res.render("login_register"));
-// Signup Route
+// Login/Register Route
+router.get("/login_register", (req, res) => {
+  const user = req.session.user || null; // Check if user is logged in
+  res.render("login_register", { user });
+});
+
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Check if user already exists
-  const userExists = await User.findOne({ email });
-  if (userExists) {
-    return res.status(400).json({ message: "Email is already registered" });
-  }
-
-  // Create a new user
-  const user = new User({
-    username,
-    email,
-    password,
-  });
-
   try {
-    await user.save();
-    // res.status(201).json({
-    //   message: "User registered successfully",
-    // });
-    req.session.user = {
-      username: user.username,
-      email: user.email,
-    };
+    // Check if the user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: "Email is already registered" });
+    }
+
+    // Create and save the user
+    const user = await User.create({ username, email, password });
+    req.session.user = { username: user.username }; // Save non-sensitive info in session
+
     res.redirect("/realEstate");
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Error during signup:", err.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-// Signin Route
 router.post("/signin", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
-
+    // Find user by username
+    const user = await User.findOne({ username: username.trim() });
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-
+    // Check if the password matches
+    const isMatch = await user.matchPassword(password.trim());
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Store the user in the session
-    req.session.user = {
-      username: user.username,
-      email: user.email,
-    };
-
-    // Option 1: Redirect to realEstate page
+    req.session.user = { username: user.username }; // Save session info
     res.redirect("/realEstate");
-
-    // Option 2: Render realEstate page with user data
-    // res.render("realEstate", { user: req.session.user });
+    // .status(200)
+    // .json({
+    //   message: "Signin successful",
+    //   user: { username: user.username },
+    // });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Error during signin:", err.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
+// Logout Route
+router.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ message: "Error logging out" });
+    }
+    res.status(200).json({ message: "Logged out successfully" });
+  });
+});
 router.get("/housedetails", (req, res) => res.render("housedetails"));
 module.exports = router;
